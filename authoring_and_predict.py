@@ -15,9 +15,9 @@ def quickstart():
     predictionEndpoint = params.predictionEndpoint
     
     # We use a UUID to avoid name collisions.
-    appName = "Contoso Pizza Company " + str(uuid.uuid4())
+    appName = "Book prediction " + str(uuid.uuid4())
     versionId = "0.1"
-    intentName = "OrderPizzaIntent"
+    intentName = "book"
 
     client = LUISAuthoringClient(authoringEndpoint, 
                             CognitiveServicesCredentials(authoringKey))
@@ -35,5 +35,10 @@ def quickstart():
     print(f"Created LUIS app with ID {app_id}")
 
     client.model.add_intent(app_id, versionId, intentName)
-                        
+
+    # Add Prebuilt entity
+    client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["number"])                    
+
+
+
 quickstart()
