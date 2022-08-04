@@ -1,32 +1,105 @@
 [
     {
-        "text": "I'd like to book a trip to Atlantis from Caprica on Saturday, August 13, 2016 for 8 adults. I have a tight budget of 1700.",
+        "text": "I'm looking for a trip to Gotham City leaving from Kakariko Village on Saturday, August 13, 2016. 3 adults for no more than $2400 USD.",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 12,
-                "endCharIndex": 16
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 27,
-                "endCharIndex": 35
+                "entityName": "budget",
+                "startCharIndex": 124,
+                "endCharIndex": 133
             },
             {
                 "entityName": "or_city",
-                "startCharIndex": 41,
-                "endCharIndex": 48
+                "startCharIndex": 51,
+                "endCharIndex": 67
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 26,
+                "endCharIndex": 37
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 52,
-                "endCharIndex": 77
-            },
+                "startCharIndex": 71,
+                "endCharIndex": 96
+            }
+        ]
+    },
+    {
+        "text": "Hi, I need to go to Mos Eisley for a wedding, leaving on Saturday, August 13, 2016 and returning on Tuesday, August 16, 2016. Preferably for $3700.",
+        "intentName": "inform",
+        "entityLabels": [
             {
                 "entityName": "budget",
-                "startCharIndex": 117,
-                "endCharIndex": 121
+                "startCharIndex": 141,
+                "endCharIndex": 146
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 20,
+                "endCharIndex": 30
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 57,
+                "endCharIndex": 82
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 100,
+                "endCharIndex": 124
+            }
+        ]
+    },
+    {
+        "text": "I'd like to get away from Monday, August 15, 2016 to Wednesday, August 31, 2016. My budget is $3200 and I would leave from Detroit.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 94,
+                "endCharIndex": 99
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 123,
+                "endCharIndex": 130
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 26,
+                "endCharIndex": 49
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 53,
+                "endCharIndex": 79
+            }
+        ]
+    },
+    {
+        "text": "Hello, I want to leave from Seoul on August 27 and return on September 9. You can go to Manaus.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 28,
+                "endCharIndex": 33
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 88,
+                "endCharIndex": 94
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 37,
+                "endCharIndex": 46
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 61,
+                "endCharIndex": 72
             }
         ]
     },
@@ -34,6 +107,16 @@
         "text": "I would like a vacation for one in Mannheim from August 17 to September 7. My city of departure is Porto Alegre. It should cost less than $3000.",
         "intentName": "inform",
         "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 138,
+                "endCharIndex": 143
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 99,
+                "endCharIndex": 111
+            },
             {
                 "entityName": "dst_city",
                 "startCharIndex": 35,
@@ -48,16 +131,32 @@
                 "entityName": "end_date",
                 "startCharIndex": 62,
                 "endCharIndex": 73
-            },
+            }
+        ]
+    },
+    {
+        "text": "I'd like to go to Manaus from Miami between August 19th and September 2nd.",
+        "intentName": "inform",
+        "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 99,
-                "endCharIndex": 111
+                "startCharIndex": 30,
+                "endCharIndex": 35
             },
             {
-                "entityName": "budget",
-                "startCharIndex": 138,
-                "endCharIndex": 143
+                "entityName": "dst_city",
+                "startCharIndex": 18,
+                "endCharIndex": 24
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 44,
+                "endCharIndex": 55
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 60,
+                "endCharIndex": 73
             }
         ]
     },
@@ -66,9 +165,9 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 20,
-                "endCharIndex": 24
+                "entityName": "budget",
+                "startCharIndex": 108,
+                "endCharIndex": 112
             },
             {
                 "entityName": "or_city",
@@ -84,140 +183,349 @@
                 "entityName": "str_date",
                 "startCharIndex": 82,
                 "endCharIndex": 93
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 108,
-                "endCharIndex": 112
             }
         ]
     },
     {
-        "text": "hi there. need to book a trip to denver\ni live in houston\nsept 10 to 11",
+        "text": "Hi. I'd like to book a trip from Nagoya to Phoenix from August 15th to August 29th.",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 18,
-                "endCharIndex": 22
-            },
-            {
-                "entityName": "dst_city",
+                "entityName": "or_city",
                 "startCharIndex": 33,
                 "endCharIndex": 39
             },
             {
-                "entityName": "or_city",
-                "startCharIndex": 50,
-                "endCharIndex": 57
+                "entityName": "dst_city",
+                "startCharIndex": 43,
+                "endCharIndex": 50
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 58,
-                "endCharIndex": 65
+                "startCharIndex": 56,
+                "endCharIndex": 67
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 69,
-                "endCharIndex": 71
+                "startCharIndex": 71,
+                "endCharIndex": 82
             }
         ]
     },
     {
-        "text": "I want to go to brasilia from mannheim, can you recommend me packages from Saturday august 27 to Monday, September 12 for 2500 for 1 adult",
+        "text": "So Hey, I'm an intern- it's pretty fantastic/exciting. So anyways I need to go to Monterrey between August 27 and September 15. What do you have leaving from Stuttgart?",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "dst_city",
-                "startCharIndex": 16,
-                "endCharIndex": 24
+                "entityName": "or_city",
+                "startCharIndex": 158,
+                "endCharIndex": 167
             },
             {
-                "entityName": "or_city",
-                "startCharIndex": 30,
-                "endCharIndex": 38
+                "entityName": "dst_city",
+                "startCharIndex": 82,
+                "endCharIndex": 91
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 75,
-                "endCharIndex": 93
+                "startCharIndex": 100,
+                "endCharIndex": 109
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 97,
-                "endCharIndex": 117
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 122,
+                "startCharIndex": 114,
                 "endCharIndex": 126
             }
         ]
     },
     {
-        "text": "hi. I want to go to Tofino from Burlington. please recommend me packages from Sunday 21 to August 24 for 2200 for 7 adults.",
+        "text": "Good day, I'm located in Kobe and I have been offered a possible internship in Baltimore at the heart of the action! I need you to book a flight and hotel package for me sometime between August 26 and September 10.",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "dst_city",
-                "startCharIndex": 20,
-                "endCharIndex": 26
+                "entityName": "or_city",
+                "startCharIndex": 25,
+                "endCharIndex": 29
             },
             {
+                "entityName": "dst_city",
+                "startCharIndex": 79,
+                "endCharIndex": 88
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 187,
+                "endCharIndex": 196
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 201,
+                "endCharIndex": 213
+            }
+        ]
+    },
+    {
+        "text": "i need to know how much it costs to go from ciudad juarez to la paz leaving august 22 to september 8",
+        "intentName": "inform",
+        "entityLabels": [
+            {
                 "entityName": "or_city",
-                "startCharIndex": 32,
+                "startCharIndex": 44,
+                "endCharIndex": 57
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 61,
+                "endCharIndex": 67
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 76,
+                "endCharIndex": 85
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 89,
+                "endCharIndex": 100
+            }
+        ]
+    },
+    {
+        "text": "IM IN TIJUANA FIND ME A FLIGHT TO CURITIBA AUG 27 TO SEPT 4",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 6,
+                "endCharIndex": 13
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 34,
                 "endCharIndex": 42
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 78,
-                "endCharIndex": 87
+                "startCharIndex": 43,
+                "endCharIndex": 49
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 91,
-                "endCharIndex": 100
+                "startCharIndex": 53,
+                "endCharIndex": 59
+            }
+        ]
+    },
+    {
+        "text": "Goiania to Montreal on Sept 10 to 11th ONLY",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 7
             },
             {
-                "entityName": "budget",
-                "startCharIndex": 105,
+                "entityName": "dst_city",
+                "startCharIndex": 11,
+                "endCharIndex": 19
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 23,
+                "endCharIndex": 30
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 34,
+                "endCharIndex": 38
+            }
+        ]
+    },
+    {
+        "text": "I'm traveling alone, from Minneapolis to Ciudad Juarez. Sept 2 to Sept 22. Do you have any flights that fit?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 26,
+                "endCharIndex": 37
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 41,
+                "endCharIndex": 54
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 56,
+                "endCharIndex": 62
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 66,
+                "endCharIndex": 73
+            }
+        ]
+    },
+    {
+        "text": "You can help me by finding me a vacation from Munich to San Juan between August 27 and September 3.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 46,
+                "endCharIndex": 52
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 56,
+                "endCharIndex": 64
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 73,
+                "endCharIndex": 82
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 87,
+                "endCharIndex": 98
+            }
+        ]
+    },
+    {
+        "text": "Hi My cousin is getting married so I'm looking for a place to stay in Milan from August 27th to September 1st :slightly_smiling_face: I'd be leaving from Punta Cana",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 154,
+                "endCharIndex": 164
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 70,
+                "endCharIndex": 75
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 81,
+                "endCharIndex": 92
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 96,
                 "endCharIndex": 109
             }
         ]
     },
     {
-        "text": "Hi! I'd like to book a trip to Tel Aviv from Tijuana. I was wondering if there are any packages from August 23rd to 26th for $3400 for 2 adults. My dates are also flexible.",
+        "text": "I need to find a vacation between today and September 14th from Punta Cana to San Francisco",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 16,
-                "endCharIndex": 20
-            },
-            {
                 "entityName": "or_city",
-                "startCharIndex": 45,
-                "endCharIndex": 52
+                "startCharIndex": 64,
+                "endCharIndex": 74
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 31,
-                "endCharIndex": 39
+                "startCharIndex": 78,
+                "endCharIndex": 91
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 101,
-                "endCharIndex": 112
+                "startCharIndex": 34,
+                "endCharIndex": 39
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 116,
-                "endCharIndex": 120
+                "startCharIndex": 44,
+                "endCharIndex": 58
+            }
+        ]
+    },
+    {
+        "text": "I need a trip to Marseille on these exact dates: September 9 to September 13\nFlying from Manaus",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 89,
+                "endCharIndex": 95
             },
             {
+                "entityName": "dst_city",
+                "startCharIndex": 17,
+                "endCharIndex": 26
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 49,
+                "endCharIndex": 60
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 64,
+                "endCharIndex": 76
+            }
+        ]
+    },
+    {
+        "text": "Any week long trips to Brasilia from Mannheim between august 30 and september 15?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 37,
+                "endCharIndex": 45
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 23,
+                "endCharIndex": 31
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 54,
+                "endCharIndex": 63
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 68,
+                "endCharIndex": 80
+            }
+        ]
+    },
+    {
+        "text": "I wanna find a dope vacation package from Ulsan to Rio de Janeiro for under 6500 between August 27th and september 16, my dates are not flexible",
+        "intentName": "inform",
+        "entityLabels": [
+            {
                 "entityName": "budget",
-                "startCharIndex": 125,
-                "endCharIndex": 130
+                "startCharIndex": 76,
+                "endCharIndex": 80
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 42,
+                "endCharIndex": 47
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 51,
+                "endCharIndex": 65
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 89,
+                "endCharIndex": 100
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 105,
+                "endCharIndex": 117
             }
         ]
     },
@@ -226,9 +534,9 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 48,
-                "endCharIndex": 52
+                "entityName": "or_city",
+                "startCharIndex": 88,
+                "endCharIndex": 98
             },
             {
                 "entityName": "dst_city",
@@ -244,42 +552,162 @@
                 "entityName": "end_date",
                 "startCharIndex": 119,
                 "endCharIndex": 121
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 88,
-                "endCharIndex": 98
             }
         ]
     },
     {
-        "text": "Hi there. I have been tasked with bringing my big beautiful family on a trip! We need to go between August 30 and September 20. We've got 13100 dollars to spend and are leaving from Dublin. Lets hear whats available in St. Louis!",
+        "text": "melbourne to fukuoka august 24 to august 27",
         "intentName": "inform",
         "entityLabels": [
             {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 9
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 13,
+                "endCharIndex": 20
+            },
+            {
                 "entityName": "str_date",
+                "startCharIndex": 21,
+                "endCharIndex": 30
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 34,
+                "endCharIndex": 43
+            }
+        ]
+    },
+    {
+        "text": "SO! I am travelling with my family for a reunion\nWe are all leaving from Beijing and need to get to Toluca.\nThere will be six of us adults travelling and we need to leave between August 24 to August 27.\nWhat can you find me?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 73,
+                "endCharIndex": 80
+            },
+            {
+                "entityName": "dst_city",
                 "startCharIndex": 100,
-                "endCharIndex": 109
+                "endCharIndex": 106
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 179,
+                "endCharIndex": 188
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 192,
+                "endCharIndex": 201
+            }
+        ]
+    },
+    {
+        "text": "You can help me by booking a flight out of Cordoba to Salvador for me and my friend. Leaving ASAP and back before September 8. Oh and I'll need the best hotels you can get",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 43,
+                "endCharIndex": 50
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 54,
+                "endCharIndex": 62
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 93,
+                "endCharIndex": 97
             },
             {
                 "entityName": "end_date",
                 "startCharIndex": 114,
-                "endCharIndex": 126
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 138,
-                "endCharIndex": 151
-            },
+                "endCharIndex": 125
+            }
+        ]
+    },
+    {
+        "text": "can you get me a trip to pittsburgh, from barcelona? between sep 3 and 18",
+        "intentName": "inform",
+        "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 182,
-                "endCharIndex": 188
+                "startCharIndex": 42,
+                "endCharIndex": 51
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 219,
-                "endCharIndex": 228
+                "startCharIndex": 25,
+                "endCharIndex": 35
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 61,
+                "endCharIndex": 66
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 71,
+                "endCharIndex": 73
+            }
+        ]
+    },
+    {
+        "text": "BRASILIA TO KYOTO, SEPT 4. $4000 Budget GOOOO",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 27,
+                "endCharIndex": 32
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 8
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 12,
+                "endCharIndex": 17
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 19,
+                "endCharIndex": 25
+            }
+        ]
+    },
+    {
+        "text": "Belem to Busan. Aug 28 or later. $6200 budget. Nicest hotel you got capisci?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 33,
+                "endCharIndex": 38
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 5
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 9,
+                "endCharIndex": 14
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 16,
+                "endCharIndex": 22
             }
         ]
     },
@@ -288,9 +716,19 @@
         "intentName": "inform",
         "entityLabels": [
             {
+                "entityName": "budget",
+                "startCharIndex": 110,
+                "endCharIndex": 114
+            },
+            {
                 "entityName": "or_city",
                 "startCharIndex": 25,
                 "endCharIndex": 32
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 138,
+                "endCharIndex": 143
             },
             {
                 "entityName": "str_date",
@@ -301,16 +739,32 @@
                 "entityName": "end_date",
                 "startCharIndex": 87,
                 "endCharIndex": 89
-            },
+            }
+        ]
+    },
+    {
+        "text": "Salvador to Recife, Sept 1 for 1, $1000 budget. I want the best hotel in Recife",
+        "intentName": "inform",
+        "entityLabels": [
             {
                 "entityName": "budget",
-                "startCharIndex": 110,
-                "endCharIndex": 114
+                "startCharIndex": 34,
+                "endCharIndex": 39
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 8
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 138,
-                "endCharIndex": 143
+                "startCharIndex": 12,
+                "endCharIndex": 18
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 20,
+                "endCharIndex": 26
             }
         ]
     },
@@ -318,11 +772,6 @@
         "text": "Three words: Alexandria to Cencun. Please book a trip for us. two adults. Leaving ASAP, returning before Sep 6",
         "intentName": "inform",
         "entityLabels": [
-            {
-                "entityName": "intent",
-                "startCharIndex": 42,
-                "endCharIndex": 46
-            },
             {
                 "entityName": "or_city",
                 "startCharIndex": 13,
@@ -346,69 +795,277 @@
         ]
     },
     {
-        "text": "i am looking to explore some options for an upcoming internship. i have a week off from sept 2-9 to see where i\u2019d like to spend my next 6 months\ni have a 5800 budget and im leaving from la paz\ncan you tell me whats available in Ulsan",
+        "text": "ahhhh hey bud. I need to get the heck outta tel aviv ASAP\ncan ya get me to London for, say, 2900? and TODAY please",
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "str_date",
-                "startCharIndex": 88,
-                "endCharIndex": 94
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 95,
+                "entityName": "budget",
+                "startCharIndex": 92,
                 "endCharIndex": 96
             },
             {
-                "entityName": "budget",
-                "startCharIndex": 154,
-                "endCharIndex": 158
-            },
-            {
                 "entityName": "or_city",
-                "startCharIndex": 186,
-                "endCharIndex": 192
+                "startCharIndex": 44,
+                "endCharIndex": 52
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 228,
-                "endCharIndex": 233
+                "startCharIndex": 75,
+                "endCharIndex": 81
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 102,
+                "endCharIndex": 107
             }
         ]
     },
     {
-        "text": "Hi there. I need to go from Beijing to Montreal from Sept 12-16\n1800 max",
+        "text": "hey so i need 2 get my parents out of town. where can u ship em between septemeber 2 and 13th for 3500 dollars?\nleaving from montreal ",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 98,
+                "endCharIndex": 110
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 125,
+                "endCharIndex": 133
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 72,
+                "endCharIndex": 84
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 89,
+                "endCharIndex": 93
+            }
+        ]
+    },
+    {
+        "text": "ok bud I'm sure you've never dealt with this kinda thing in ur line of work but I've got a bit of a bad rap here on the streets of Burlington so I've gotta lay low for a little while... I've got 1700 dollars to burn.  can ya get me to Long Beach by the first of next month",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 195,
+                "endCharIndex": 199
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 131,
+                "endCharIndex": 141
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 235,
+                "endCharIndex": 245
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 253,
+                "endCharIndex": 272
+            }
+        ]
+    },
+    {
+        "text": "ok so i am free to travel from september 13 until the 23.  can you tell me my options for Sao Paulo leaving from Sapporo please",
         "intentName": "inform",
         "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 28,
-                "endCharIndex": 35
+                "startCharIndex": 113,
+                "endCharIndex": 120
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 39,
-                "endCharIndex": 47
+                "startCharIndex": 90,
+                "endCharIndex": 99
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 53,
-                "endCharIndex": 60
+                "startCharIndex": 31,
+                "endCharIndex": 43
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 61,
-                "endCharIndex": 63
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 64,
-                "endCharIndex": 68
+                "startCharIndex": 54,
+                "endCharIndex": 56
             }
         ]
     },
     {
-        "text": "Portland to St. Petersburg please. Under 3300 please\nSept 13-17",
+        "text": "Please find a flight from Beijing to Kochi for me. Sept 16 to 20",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 26,
+                "endCharIndex": 33
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 37,
+                "endCharIndex": 42
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 51,
+                "endCharIndex": 58
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 62,
+                "endCharIndex": 64
+            }
+        ]
+    },
+    {
+        "text": "sept 12 to 22. toluca to naples",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 15,
+                "endCharIndex": 21
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 25,
+                "endCharIndex": 31
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 0,
+                "endCharIndex": 7
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 11,
+                "endCharIndex": 13
+            }
+        ]
+    },
+    {
+        "text": "Hey, i want to go to rome from kochi. Can you find me some packages between september 2nd and 6th for 4300",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 102,
+                "endCharIndex": 106
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 31,
+                "endCharIndex": 36
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 21,
+                "endCharIndex": 25
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 86,
+                "endCharIndex": 89
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 94,
+                "endCharIndex": 97
+            }
+        ]
+    },
+    {
+        "text": "I'd like to find a vacation between tomorrow and September 14th from Santos to Leon",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 69,
+                "endCharIndex": 75
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 79,
+                "endCharIndex": 83
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 36,
+                "endCharIndex": 44
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 49,
+                "endCharIndex": 63
+            }
+        ]
+    },
+    {
+        "text": "I want to find a vacation between September 12th and 18th to San Diego from Calgary for under 1800.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 94,
+                "endCharIndex": 98
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 76,
+                "endCharIndex": 83
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 61,
+                "endCharIndex": 70
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 34,
+                "endCharIndex": 48
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 53,
+                "endCharIndex": 57
+            }
+        ]
+    },
+    {
+        "text": "I want to find a vacay between sept.12 and 19 for under 5500, leaving from Mannheim",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 56,
+                "endCharIndex": 60
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 75,
+                "endCharIndex": 83
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 31,
+                "endCharIndex": 38
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 43,
+                "endCharIndex": 45
+            }
+        ]
+    },
+    {
+        "text": "San Jose to Porto Alegre please. oh it needs to be between sept 18 to 22",
         "intentName": "inform",
         "entityLabels": [
             {
@@ -419,146 +1076,17 @@
             {
                 "entityName": "dst_city",
                 "startCharIndex": 12,
-                "endCharIndex": 26
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 41,
-                "endCharIndex": 45
+                "endCharIndex": 24
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 53,
-                "endCharIndex": 60
+                "startCharIndex": 59,
+                "endCharIndex": 66
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 61,
-                "endCharIndex": 63
-            }
-        ]
-    },
-    {
-        "text": "Hello. I've received an offer of temporary employment from a global ad agency. I am currently trying to determine which office to work in\nWhich is entirely predicated on the selection of travel packages that you can offer me\nMy point of departure is Barcelona \"Look at flights to Manas please.\nIt must be between Aug 31 and Sep 16\nIt must also be less than 1900\"",
-        "intentName": "inform",
-        "entityLabels": [
-            {
-                "entityName": "or_city",
-                "startCharIndex": 250,
-                "endCharIndex": 259
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 280,
-                "endCharIndex": 285
-            },
-            {
-                "entityName": "str_date",
-                "startCharIndex": 313,
-                "endCharIndex": 319
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 324,
-                "endCharIndex": 330
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 357,
-                "endCharIndex": 361
-            }
-        ]
-    },
-    {
-        "text": "Hey there, I\u2019m a student looking to stretch 2700 to get myself a trip to an internship, hoping you can help me out here. I would be departing from Alexandria\nCan you see if I can get to Manas between Aug 30 and Sept 15 on this budget?",
-        "intentName": "inform",
-        "entityLabels": [
-            {
-                "entityName": "budget",
-                "startCharIndex": 44,
-                "endCharIndex": 48
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 147,
-                "endCharIndex": 157
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 186,
-                "endCharIndex": 191
-            },
-            {
-                "entityName": "str_date",
-                "startCharIndex": 200,
-                "endCharIndex": 206
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 211,
-                "endCharIndex": 218
-            }
-        ]
-    },
-    {
-        "text": "On late nights at work, friday nights melting into Saturday mornings, I\u2019d dream about the day I can come to you with a booking request. I have September 8 to 25 off\nThinking of going somewhere from Belo Horizonte\nDo you have a flight to MUnich?",
-        "intentName": "inform",
-        "entityLabels": [
-            {
-                "entityName": "intent",
-                "startCharIndex": 119,
-                "endCharIndex": 123
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 198,
-                "endCharIndex": 212
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 237,
-                "endCharIndex": 243
-            },
-            {
-                "entityName": "str_date",
-                "startCharIndex": 143,
-                "endCharIndex": 154
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 158,
-                "endCharIndex": 160
-            }
-        ]
-    },
-    {
-        "text": "I want to find a vacation between September 12th and 18th to San Diego from Calgary for under 1800.",
-        "intentName": "inform",
-        "entityLabels": [
-            {
-                "entityName": "str_date",
-                "startCharIndex": 34,
-                "endCharIndex": 48
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 53,
-                "endCharIndex": 57
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 61,
-                "endCharIndex": 70
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 76,
-                "endCharIndex": 83
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 94,
-                "endCharIndex": 98
+                "startCharIndex": 70,
+                "endCharIndex": 72
             }
         ]
     },
@@ -567,9 +1095,19 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "intent",
-                "startCharIndex": 15,
-                "endCharIndex": 19
+                "entityName": "budget",
+                "startCharIndex": 105,
+                "endCharIndex": 109
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 79,
+                "endCharIndex": 94
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 66,
+                "endCharIndex": 73
             },
             {
                 "entityName": "str_date",
@@ -580,21 +1118,6 @@
                 "entityName": "end_date",
                 "startCharIndex": 58,
                 "endCharIndex": 62
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 66,
-                "endCharIndex": 73
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 79,
-                "endCharIndex": 94
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 105,
-                "endCharIndex": 109
             }
         ]
     },
@@ -603,14 +1126,9 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "str_date",
-                "startCharIndex": 33,
-                "endCharIndex": 47
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 51,
-                "endCharIndex": 65
+                "entityName": "budget",
+                "startCharIndex": 104,
+                "endCharIndex": 108
             },
             {
                 "entityName": "or_city",
@@ -623,133 +1141,71 @@
                 "endCharIndex": 93
             },
             {
-                "entityName": "budget",
-                "startCharIndex": 104,
-                "endCharIndex": 108
-            }
-        ]
-    },
-    {
-        "text": "Hi there. I have 2000 to spend on my lovely parents\nI want to get them out of Puebla sometime this month\nSeptember 3 to 16\nWhats the longest trip you can book me?",
-        "intentName": "inform",
-        "entityLabels": [
-            {
-                "entityName": "intent",
-                "startCharIndex": 154,
-                "endCharIndex": 158
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 17,
-                "endCharIndex": 21
-            },
-            {
-                "entityName": "or_city",
-                "startCharIndex": 78,
-                "endCharIndex": 84
-            },
-            {
                 "entityName": "str_date",
-                "startCharIndex": 105,
-                "endCharIndex": 116
+                "startCharIndex": 33,
+                "endCharIndex": 47
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 120,
-                "endCharIndex": 122
+                "startCharIndex": 51,
+                "endCharIndex": 65
             }
         ]
     },
     {
-        "text": "i live in new york. i have 2600 dollars to spend. i can travel between september 5th and 24th.\nwhat can you find me in leon",
+        "text": "I want to go to denver from frankfurt for under 2900 from september 8th to 13th",
         "intentName": "inform",
         "entityLabels": [
-            {
-                "entityName": "or_city",
-                "startCharIndex": 10,
-                "endCharIndex": 18
-            },
             {
                 "entityName": "budget",
-                "startCharIndex": 27,
-                "endCharIndex": 39
+                "startCharIndex": 48,
+                "endCharIndex": 52
             },
-            {
-                "entityName": "str_date",
-                "startCharIndex": 71,
-                "endCharIndex": 84
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 89,
-                "endCharIndex": 93
-            },
-            {
-                "entityName": "dst_city",
-                "startCharIndex": 119,
-                "endCharIndex": 123
-            }
-        ]
-    },
-    {
-        "text": "Looking to go from San Francisco to MArseille. Book me for September 18 to 22. Let me know if its more than 2800 because thats all I can afford",
-        "intentName": "inform",
-        "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 19,
-                "endCharIndex": 32
+                "startCharIndex": 28,
+                "endCharIndex": 37
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 36,
-                "endCharIndex": 45
+                "startCharIndex": 16,
+                "endCharIndex": 22
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 59,
+                "startCharIndex": 58,
                 "endCharIndex": 71
             },
             {
                 "entityName": "end_date",
                 "startCharIndex": 75,
-                "endCharIndex": 77
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 108,
-                "endCharIndex": 112
+                "endCharIndex": 79
             }
         ]
     },
     {
-        "text": "Can you help me find a vacation package from Indianapolis to Essen for under 3500 and between September 6th and 22nd please?",
+        "text": "I would like to find a vacation between september 20th and October 4th from Sao Paulo to Leon",
         "intentName": "inform",
         "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 45,
-                "endCharIndex": 57
+                "startCharIndex": 76,
+                "endCharIndex": 85
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 61,
-                "endCharIndex": 66
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 71,
-                "endCharIndex": 81
+                "startCharIndex": 89,
+                "endCharIndex": 93
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 94,
-                "endCharIndex": 107
+                "startCharIndex": 40,
+                "endCharIndex": 54
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 112,
-                "endCharIndex": 116
+                "startCharIndex": 59,
+                "endCharIndex": 70
             }
         ]
     },
@@ -758,14 +1214,19 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "dst_city",
-                "startCharIndex": 16,
-                "endCharIndex": 21
+                "entityName": "budget",
+                "startCharIndex": 70,
+                "endCharIndex": 74
             },
             {
                 "entityName": "or_city",
                 "startCharIndex": 27,
                 "endCharIndex": 34
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 16,
+                "endCharIndex": 21
             },
             {
                 "entityName": "str_date",
@@ -776,11 +1237,302 @@
                 "entityName": "end_date",
                 "startCharIndex": 62,
                 "endCharIndex": 65
+            }
+        ]
+    },
+    {
+        "text": "What packages do you have available between september 7th and 13th from Columbus to Punta Cana?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 72,
+                "endCharIndex": 80
             },
             {
+                "entityName": "dst_city",
+                "startCharIndex": 84,
+                "endCharIndex": 94
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 44,
+                "endCharIndex": 57
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 62,
+                "endCharIndex": 66
+            }
+        ]
+    },
+    {
+        "text": "Beijing to Tijuana Sept 6-Sept 9",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 0,
+                "endCharIndex": 7
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 11,
+                "endCharIndex": 18
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 19,
+                "endCharIndex": 25
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 26,
+                "endCharIndex": 32
+            }
+        ]
+    },
+    {
+        "text": "ay i need to get my parents out of SL this month ok??? can u book them somewhere from St. Louis til the 28th for 4300 bucks and get em out of here today if u can",
+        "intentName": "inform",
+        "entityLabels": [
+            {
                 "entityName": "budget",
-                "startCharIndex": 70,
-                "endCharIndex": 74
+                "startCharIndex": 113,
+                "endCharIndex": 117
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 86,
+                "endCharIndex": 95
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 147,
+                "endCharIndex": 152
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 104,
+                "endCharIndex": 108
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 35,
+                "endCharIndex": 37
+            }
+        ]
+    },
+    {
+        "text": "from 22nd-28nd of september i just wanna flee town and forget about work, family, my mortgage, responsibilities, my alcoholism, etc.. i am thinking Ciudad Juarez\nfrom Dalle",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 167,
+                "endCharIndex": 172
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 148,
+                "endCharIndex": 161
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 5,
+                "endCharIndex": 9
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 10,
+                "endCharIndex": 27
+            }
+        ]
+    },
+    {
+        "text": "ay bruh i got 3300 and some naggy ass parental figures i need out of my hair. where can u get 2 adults from maceio between like ... september 11th and 24th within my budgeT?",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 14,
+                "endCharIndex": 18
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 108,
+                "endCharIndex": 114
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 132,
+                "endCharIndex": 146
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 151,
+                "endCharIndex": 155
+            }
+        ]
+    },
+    {
+        "text": "i want you to recommend me a package in rome that leaves from las vegas. i have a travel window between 20 and 26 september",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "or_city",
+                "startCharIndex": 62,
+                "endCharIndex": 71
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 40,
+                "endCharIndex": 44
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 104,
+                "endCharIndex": 106
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 111,
+                "endCharIndex": 123
+            }
+        ]
+    },
+    {
+        "text": "I need to find something between september 8th and 27th for under 4300 from frankfurt",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 66,
+                "endCharIndex": 70
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 76,
+                "endCharIndex": 85
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 33,
+                "endCharIndex": 46
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 51,
+                "endCharIndex": 55
+            }
+        ]
+    },
+    {
+        "text": "I want to go somewhere from toronto. ideally between spt 9 and spt 24. we will be 1 adult and 4 children. we have 13700.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 114,
+                "endCharIndex": 119
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 28,
+                "endCharIndex": 35
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 53,
+                "endCharIndex": 58
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 63,
+                "endCharIndex": 69
+            }
+        ]
+    },
+    {
+        "text": "I need to find MEWTWO!!!!! I need to get to Paris from Kingston on or after the 6th. I have a friend tagging along to help me and we have 6000",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 138,
+                "endCharIndex": 142
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 55,
+                "endCharIndex": 63
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 44,
+                "endCharIndex": 49
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 80,
+                "endCharIndex": 83
+            }
+        ]
+    },
+    {
+        "text": "Take me from Beijing to Salvador from the 24th to 27th for 2500 or under",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 59,
+                "endCharIndex": 63
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 13,
+                "endCharIndex": 20
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 24,
+                "endCharIndex": 32
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 42,
+                "endCharIndex": 46
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 50,
+                "endCharIndex": 54
+            }
+        ]
+    },
+    {
+        "text": "I wanna find a vacation between yesterday and the 24th for under 3200 and leaving from Tijuana",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 65,
+                "endCharIndex": 69
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 87,
+                "endCharIndex": 94
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 32,
+                "endCharIndex": 41
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 50,
+                "endCharIndex": 54
             }
         ]
     },
@@ -789,14 +1541,9 @@
         "intentName": "inform",
         "entityLabels": [
             {
-                "entityName": "str_date",
-                "startCharIndex": 44,
-                "endCharIndex": 48
-            },
-            {
-                "entityName": "end_date",
-                "startCharIndex": 53,
-                "endCharIndex": 57
+                "entityName": "budget",
+                "startCharIndex": 100,
+                "endCharIndex": 104
             },
             {
                 "entityName": "or_city",
@@ -809,40 +1556,149 @@
                 "endCharIndex": 95
             },
             {
-                "entityName": "budget",
-                "startCharIndex": 100,
-                "endCharIndex": 104
+                "entityName": "str_date",
+                "startCharIndex": 44,
+                "endCharIndex": 48
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 53,
+                "endCharIndex": 57
             }
         ]
     },
     {
-        "text": "Fukuoka to Belo Horizonte. 6000. 9th to 17th.",
+        "text": "I would like to take my soon to be wife on a great honeymoon, she deserves the best but we can only afford something up to 4200 for 6 days. We had discussed going to Punta Cana from Sapporo where our wedding will take place on the 17th, we can leave after that.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 123,
+                "endCharIndex": 127
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 182,
+                "endCharIndex": 189
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 166,
+                "endCharIndex": 176
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 231,
+                "endCharIndex": 235
+            }
+        ]
+    },
+    {
+        "text": "I want to go to Barcelona from anywhere between the 12th and the 28th of September. I have 2100 and my assistant will be coming along. I am specifically looking for hotels near a park or beach or both.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 91,
+                "endCharIndex": 95
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 16,
+                "endCharIndex": 25
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 52,
+                "endCharIndex": 56
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 65,
+                "endCharIndex": 82
+            }
+        ]
+    },
+    {
+        "text": "Me and 3 friends are going on fall break and want to go to San Diego from Calgary from the 8th to 25th and we have 14000 between us.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 115,
+                "endCharIndex": 120
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 74,
+                "endCharIndex": 81
+            },
+            {
+                "entityName": "dst_city",
+                "startCharIndex": 59,
+                "endCharIndex": 68
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 91,
+                "endCharIndex": 94
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 98,
+                "endCharIndex": 102
+            }
+        ]
+    },
+    {
+        "text": "I need to find a vacation between the 12 of september and 2nd of October for under 6500, leaving from Sydney.",
+        "intentName": "inform",
+        "entityLabels": [
+            {
+                "entityName": "budget",
+                "startCharIndex": 83,
+                "endCharIndex": 87
+            },
+            {
+                "entityName": "or_city",
+                "startCharIndex": 102,
+                "endCharIndex": 108
+            },
+            {
+                "entityName": "str_date",
+                "startCharIndex": 38,
+                "endCharIndex": 53
+            },
+            {
+                "entityName": "end_date",
+                "startCharIndex": 58,
+                "endCharIndex": 72
+            }
+        ]
+    },
+    {
+        "text": "I want to go to Leon from Nagoya between the 13th and october 2nd.",
         "intentName": "inform",
         "entityLabels": [
             {
                 "entityName": "or_city",
-                "startCharIndex": 0,
-                "endCharIndex": 7
+                "startCharIndex": 26,
+                "endCharIndex": 32
             },
             {
                 "entityName": "dst_city",
-                "startCharIndex": 11,
-                "endCharIndex": 25
-            },
-            {
-                "entityName": "budget",
-                "startCharIndex": 27,
-                "endCharIndex": 31
+                "startCharIndex": 16,
+                "endCharIndex": 20
             },
             {
                 "entityName": "str_date",
-                "startCharIndex": 33,
-                "endCharIndex": 36
+                "startCharIndex": 45,
+                "endCharIndex": 49
             },
             {
                 "entityName": "end_date",
-                "startCharIndex": 40,
-                "endCharIndex": 44
+                "startCharIndex": 54,
+                "endCharIndex": 65
             }
         ]
     }
