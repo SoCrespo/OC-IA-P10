@@ -1,30 +1,51 @@
 from luis_functions import understand
+import logging
+
+
+FIRST_MESSAGE_KEY = 'first_message'
+START_KEY = 'start'
+GREETING_KEY = 'greeting'
+NONE_KEY = 'None'
+STR_DATE_KEY = 'str_date'
+END_DATE_KEY = 'end_date'
+BUDGET_KEY = 'budget'
+OR_CITY_KEY = 'or_city'
+DST_CITY_KEY = 'dst_city'
+SUMMARIZE_KEY = 'summarize'
+REPHRASE_KEY = 'rephrase'
+LAST_MESSAGE_KEY = 'last_message'
 
 entities = [
-        "or_city",
-        "dst_city",
-        "str_date",
-        "end_date",
-        "budget",
+        OR_CITY_KEY,
+        DST_CITY_KEY,
+        STR_DATE_KEY,
+        BUDGET_KEY,
+        END_DATE_KEY,
     ]
 
+def summary_message(elements):
+    return (f"from {elements[OR_CITY_KEY]} "
+            f"to {elements[DST_CITY_KEY]}, "
+            f"leaving on {elements[STR_DATE_KEY]} "
+            f"and returning on {elements[END_DATE_KEY]},"
+            f" for a budget of {elements[BUDGET_KEY]}?")
 
 class Dialog:
     def __init__(self, entities=entities):
         self.elements = dict.fromkeys(entities, '')
         self.messages = {
-            "first_message": "Hi, I'm your flight assistant.",
-            "start": "How can I help you?",
-            "greeting": "Thanks, tell me more about your flight!",
-            "none": "I'm sorry, I didn't understand. Could you rephrase please?",
-            "str_date": "When do you want to leave?",
-            "end_date": "When do you want to come back?",
-            "dst_city": "Where do you want to fly to?",
-            "or_city": "Where do you want to depart from?",
-            "budget": "What is your budget?",
-            "summarize": "Let's sum up: you want to book a flight" ,  
-            "rephrase": "Ok, let's try again.",
-            "last_message": "Great, let's find your flights!",
+            FIRST_MESSAGE_KEY: "Hi, I'm your flight assistant.",
+            START_KEY: "How can I help you?",
+            GREETING_KEY: "Thanks, tell me more about your flight!",
+            NONE_KEY: "I'm sorry, I didn't understand. Could you rephrase please?",
+            STR_DATE_KEY: "When do you want to leave?",
+            END_DATE_KEY: "When do you want to come back?",
+            DST_CITY_KEY: "Where do you want to fly to?",
+            OR_CITY_KEY: "Where do you want to depart from?",
+            BUDGET_KEY: "What is your budget?",
+            SUMMARIZE_KEY: "Let's sum up: you want to book a flight" ,  
+            REPHRASE_KEY: "Ok, let's try again.",
+            LAST_MESSAGE_KEY: "Great, let's find your flights!",
             }
         self.intent = None
         self.entities = None
@@ -35,11 +56,7 @@ class Dialog:
 
     @property
     def summary(self):
-        return (f"from {self.elements['or_city']} "
-                f"to {self.elements['dst_city']}, "
-                f"leaving on {self.elements['str_date']} "
-                f"and returning on {self.elements['end_date']},"
-                f" for a budget of {self.elements['budget']}?")
+        return summary_message(self.elements)
 
     def next_element_to_ask(self):
         """Return the first key of self.entities with '' value."""
@@ -54,24 +71,29 @@ class Dialog:
     def fix_end_date(self):
         """
         If str_date already exist among self.elements,
-        converts self.entities['str_date'] to self.entities['end_date'].
+        converts self.entities[STR_DATE_KEY] to self.entities[END_DATE_KEY].
         """
-        if self.elements['str_date'] and 'str_date' in self.entities:
-            end_date = self.entities.pop('str_date')
-            self.entities['end_date'] = end_date
+        if self.elements[STR_DATE_KEY] and STR_DATE_KEY in self.entities:
+            end_date = self.entities.pop(STR_DATE_KEY)
+            self.entities[END_DATE_KEY] = end_date
 
     def ask_till_all_elements_are_known(self):
         """
         Ask for missing elements until all keys of self.elements
         have a value (different from '').
         """
-        topic = "start"
+        topic = START_KEY
         while not self.all_elements_are_known:
+            if not topic in self.messages:
+                logging.error(f'Unknown topic: {topic}')
+                topic = NONE_KEY
+                
             message = self.messages[topic]
+
             text = input(message + '\n')
 
             if not text:
-                message = self.messages["none"]
+                message = self.messages[NONE_KEY]
                 continue
             luis_response = understand(text)
             self.intent, self.entities = luis_response['intent'], luis_response['entities']
@@ -80,31 +102,42 @@ class Dialog:
                 self.elements.update(self.entities)
                 topic = self.next_element_to_ask()
             else:
-                topic = self.intent if self.intent != 'inform' else 'none'
+                topic = self.intent if self.intent != 'inform' else NONE_KEY
 
     def customer_confirms(self):
-        """ for confirmation."""
-        text = input(f'{self.messages["summarize"]} {self.summary}\n')
+        """For confirmation."""
+        text = input(f'{self.messages[SUMMARIZE_KEY]} {self.summary}\n')
         luis_response = understand(text)
-        return luis_response['intent'] == 'confirm'
+        its_ok = luis_response['intent'] == 'confirm'
+        logging.info(its_ok)
+        return its_ok
    
     
-    def main(self, first_message=True):
+    def main(self):
         """
         Main dialog loop.
         """
-        if first_message:
-            print(self.messages["first_message"], end=' ')
+        first_message=True
+        while True:
+            if first_message:
+                print(self.messages[FIRST_MESSAGE_KEY], end=' ')
 
-        self.ask_till_all_elements_are_known()
-        if self.customer_confirms():
-            print(self.messages["last_message"])
-        else:
-            print(self.messages["rephrase"], end=' ')
-            self.reset_elements()
-            self.main(first_message=False)
+            self.ask_till_all_elements_are_known()
+            if self.customer_confirms():
+                print(self.messages[LAST_MESSAGE_KEY])
+                break
+            else:
+                print(self.messages[REPHRASE_KEY], end=' ')
+                self.reset_elements()
+                first_message = False
 
 
 if __name__ == '__main__':
     dialog = Dialog()
     dialog.main()
+
+## TODO:
+# refacto : créer dataclass pour les elements (et pour les messages)
+# entraîner LUIS pour l'intention "désaccord"
+# debug : gérer le cas des intents non reconnus (confirm doit être traité)
+# logger rephrase et confirm (Azure Insights)

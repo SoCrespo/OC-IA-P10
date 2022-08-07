@@ -26,5 +26,5 @@ def understand(text):
     return {'intent': intent, 'entities': result.prediction.entities}
 
 if __name__ == '__main__':
-    print(understand("I want to book a flight from New York to Paris on the 15th of July"))
+    print(understand("Narp"))
         
