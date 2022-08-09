@@ -3,19 +3,19 @@ from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 import params
 
-runtimeCredentials = CognitiveServicesCredentials(
-    params.predictionKey)
+runtime_credentials = CognitiveServicesCredentials(
+    params.prediction_key)
 
 clientRuntime = LUISRuntimeClient(
-    endpoint=params.predictionEndpoint, 
-    credentials=runtimeCredentials)
+    endpoint=params.prediction_endpoint, 
+    credentials=runtime_credentials)
 
 
 def understand(text):
     """Return LUIS intent and entities for a given text."""
     request = {"query": text}
     result = clientRuntime.prediction.get_slot_prediction(
-        params.appId, params.slotName, request)
+        params.app_id, params.slot_name, request)
     intent = result.prediction.top_intent
     entities = result.prediction.entities
     for key, value in entities.items():
