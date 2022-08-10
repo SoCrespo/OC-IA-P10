@@ -11,7 +11,8 @@ class LuisManager:
                 authoring_key, 
                 authoring_endpoint,
                 prediction_key,
-                prediction_endpoint): 
+                prediction_endpoint,
+                slot_name): 
                 
         """
         Manage interactions with existing Luis model:
@@ -30,10 +31,11 @@ class LuisManager:
         self.authoring_endpoint = authoring_endpoint
         self.prediction_key = prediction_key
         self.prediction_endpoint = prediction_endpoint
+        self.slot_name = slot_name
 
-        endpoint_tail = f"v3.0-preview/apps/{self.app_id}/versions/{self.version_id}/"
-        self.request_authoring_url = f"{self.authoring_endpoint}luis/authoring/{endpoint_tail}"
-        self.request_prediction_url = f"{self.prediction_endpoint}luis/{endpoint_tail}"
+        self.request_authoring_url = f"{self.authoring_endpoint}luis/authoring/v3.0/apps/{self.app_id}/versions/{self.version_id}/"
+        self.request_batch_test_url = f'{self.prediction_endpoint}luis/v3.0-preview/apps/{self.app_id}/slots/{self.slot_name}/evaluations/'
+        self.request_prediction_url = f'{self.prediction_endpoint}luis/prediction/v3.0/apps/{self.app_id}/slots/{self.slot_name}/'
 
         self.authoring_headers = {
         'Content-Type': 'application/json',
@@ -154,6 +156,27 @@ class LuisManager:
             logging.warning(f"Problem: {response.json()['error']}")
         return response    
 
+    def get_prediction(self, sentence):
+        """
+        Get prediction from LUIS.
+        Return a dict.
+        """
+        url = self.request_prediction_url + "predict"
+        data = {"query": sentence}
+        response = requests.post(url, headers=self.prediction_headers, json=data)
+        if response.status_code < 400:
+            logging.info(f"Prediction: {response.json()['prediction']}")
+        else:
+            logging.warning(f"Error at prediction: {response.json()['error']}")
+        return response
+
+    def publish_model(self):
+        """
+        Publish model to production
+        to the published endpoint.
+        Return a requests.Response object.
+        """
+        raise NotImplementedError
 
     def upload_test_data(self, test_data):
         """
@@ -172,7 +195,7 @@ class LuisManager:
                 ...]
         }
         """
-        url = self.request_prediction_url + "evaluations"
+        url = self.request_batch_test_url
         data = {"LabeledTestSetUtterances": test_data}
         response = requests.post(url, headers=self.prediction_headers, json=data)
         if response.status_code < 400:
@@ -187,7 +210,7 @@ class LuisManager:
         Get test status from LUIS.
         Return a requests.Response object.
         """
-        url = self.request_prediction_url + f"evaluations/{operation_id}/status"
+        url = self.request_batch_test_url + f"{operation_id}/status"
         response = requests.get(url, headers=self.prediction_headers)
         return response
 
@@ -197,7 +220,7 @@ class LuisManager:
         Get test result from LUIS.
         Return a requests Reponse object.
         """        
-        url = self.request_prediction_url + f"evaluations/{operation_id}/result"
+        url = self.request_batch_test_url + f"{operation_id}/result"
         response = requests.get(url, headers=self.prediction_headers)
         return response
 
@@ -208,3 +231,4 @@ class LuisManager:
         Return a requests.Response object.
         """
         raise NotImplementedError
+
