@@ -4,12 +4,13 @@ import requests
 
 logging.basicConfig(level=logging.INFO)
 
-def alt_log_on_status(status_code, message_info, message_error, threshold=300):
+def log_and_raise_error(status_code, message_info, message_error, threshold=300):
     """
     Log messages according to status code.
     """
     if status_code >= threshold:
         logging.error(message_error)
+        raise Exception(message_error)
     else:
         logging.info(message_info)
 
@@ -70,7 +71,7 @@ class LuisManager:
         url = self.request_authoring_url + url_end
         data = {'name': intent_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code, 
             f"Intent {intent_name} created.", 
             f"Intent {intent_name} not created: {response.json()['error']}")
@@ -86,7 +87,7 @@ class LuisManager:
         url = self.request_authoring_url + 'entities'
         data = {'name': entity_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             f"Entity {entity_name} created.",
             f"Entity {entity_name} not created: {response.json()['error']}")
@@ -115,7 +116,7 @@ class LuisManager:
         logging.info('Starting samples upload...')
         url = self.request_authoring_url + "examples"
         response = requests.post(url, headers=self.authoring_headers, json=samples_list)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             f"Samples uploaded.",
             f"Samples not uploaded: {response.json()['error']}")
@@ -130,7 +131,7 @@ class LuisManager:
         logging.info('Starting model training...')
         url = self.request_authoring_url + "train"
         response = requests.post(url, headers=self.authoring_headers, data={})
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Training launched.",
             f"Error at training lauching: {response.json()['error']}")
@@ -144,7 +145,7 @@ class LuisManager:
         """
         url = self.request_authoring_url + "train"
         response = requests.get(url, headers=self.authoring_headers)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Model trained.",
             f"Error at training: {response.json()['error']}")
@@ -159,7 +160,7 @@ class LuisManager:
         url = self.request_prediction_url + "predict"
         data = {"query": sentence}
         response = requests.post(url, headers=self.prediction_headers, json=data)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Prediction received.",
             f"Error at prediction: {response.json()['error']}")
@@ -185,7 +186,7 @@ class LuisManager:
         url = self.request_batch_test_url
         data = {"LabeledTestSetUtterances": test_data}
         response = requests.post(url, headers=self.prediction_headers, json=data)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Test data uploaded.",
             f"Error at test data upload: {response.json()['error']}")
@@ -199,7 +200,7 @@ class LuisManager:
         """
         url = self.request_batch_test_url + f"{operation_id}/status"
         response = requests.get(url, headers=self.prediction_headers)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Test status received.",
             f"Error at test status: {response.json()['error']}")
@@ -213,7 +214,7 @@ class LuisManager:
         """        
         url = self.request_batch_test_url + f"{operation_id}/result"
         response = requests.get(url, headers=self.prediction_headers)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Test result received.",
             f"Error at test result: {response.json()['error']}")
@@ -234,7 +235,7 @@ class LuisManager:
             url=self.request_publish_url, 
             headers=self.authoring_headers,
             json=data)
-        alt_log_on_status(
+        log_and_raise_error(
             response.status_code,
             "Model published.",
             f"Error at model publishing: {response.json()['error']}")
