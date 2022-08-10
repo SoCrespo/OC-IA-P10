@@ -3,6 +3,17 @@ import requests
 
 
 logging.basicConfig(level=logging.INFO)
+
+def alt_log_on_status(status_code, message_info, message_error, threshold=300):
+    """
+    Log messages according to status code.
+    """
+    if status_code >= threshold:
+        logging.error(message_error)
+    else:
+        logging.info(message_info)
+
+
 class LuisManager:
     def __init__(self, 
                 subscription_id,
@@ -59,10 +70,10 @@ class LuisManager:
         url = self.request_authoring_url + url_end
         data = {'name': intent_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
-        if response.status_code < 400:
-            logging.info(f"Intent {intent_name} created.")
-        else:
-            logging.warning(f"Intent {intent_name} not created: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code, 
+            f"Intent {intent_name} created.", 
+            f"Intent {intent_name} not created: {response.json()['error']}")
         return response
         
 
@@ -75,10 +86,10 @@ class LuisManager:
         url = self.request_authoring_url + 'entities'
         data = {'name': entity_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
-        if response.status_code < 400:
-            logging.info(f"Entity {entity_name} created.")
-        else:
-            logging.warning(f"Entity {entity_name} not created: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            f"Entity {entity_name} created.",
+            f"Entity {entity_name} not created: {response.json()['error']}")
         return response
 
         
@@ -104,10 +115,10 @@ class LuisManager:
         logging.info('Starting samples upload...')
         url = self.request_authoring_url + "examples"
         response = requests.post(url, headers=self.authoring_headers, json=samples_list)
-        if response.status_code < 400:
-            logging.info(f"samples loaded.")
-        else:
-            logging.warning(f"samples not loaded: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            f"Samples uploaded.",
+            f"Samples not uploaded: {response.json()['error']}")
         return response
 
 
@@ -119,10 +130,10 @@ class LuisManager:
         logging.info('Starting model training...')
         url = self.request_authoring_url + "train"
         response = requests.post(url, headers=self.authoring_headers, data={})
-        if response.status_code < 400:
-            logging.info(f"Training launched.")
-        else:
-            logging.warning(f"Error at training lauching: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            "Training launched.",
+            f"Error at training lauching: {response.json()['error']}")
         return response
 
         
@@ -133,10 +144,10 @@ class LuisManager:
         """
         url = self.request_authoring_url + "train"
         response = requests.get(url, headers=self.authoring_headers)
-        if response.status_code < 400:
-            logging.info(f"Model trained.")
-        else:
-            logging.warning(f"Problem: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            "Model trained.",
+            f"Error at training: {response.json()['error']}")
         return response    
 
 
@@ -148,13 +159,11 @@ class LuisManager:
         url = self.request_prediction_url + "predict"
         data = {"query": sentence}
         response = requests.post(url, headers=self.prediction_headers, json=data)
-        if response.status_code < 400:
-            logging.info(f"Prediction: {response.json()['prediction']}")
-        else:
-            logging.warning(f"Error at prediction: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            "Prediction received.",
+            f"Error at prediction: {response.json()['error']}")
         return response
-
-
 
     def upload_test_data(self, test_data):
         """
@@ -176,10 +185,10 @@ class LuisManager:
         url = self.request_batch_test_url
         data = {"LabeledTestSetUtterances": test_data}
         response = requests.post(url, headers=self.prediction_headers, json=data)
-        if response.status_code < 400:
-            logging.info(f"Test data uploaded.")
-        else:
-            logging.warning(f"Problem: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            "Test data uploaded.",
+            f"Error at test data upload: {response.json()['error']}")
         return response
 
 
@@ -190,6 +199,10 @@ class LuisManager:
         """
         url = self.request_batch_test_url + f"{operation_id}/status"
         response = requests.get(url, headers=self.prediction_headers)
+        alt_log_on_status(
+            response.status_code,
+            "Test status received.",
+            f"Error at test status: {response.json()['error']}")
         return response
 
 
@@ -200,6 +213,10 @@ class LuisManager:
         """        
         url = self.request_batch_test_url + f"{operation_id}/result"
         response = requests.get(url, headers=self.prediction_headers)
+        alt_log_on_status(
+            response.status_code,
+            "Test result received.",
+            f"Error at test result: {response.json()['error']}")
         return response
 
 
@@ -217,8 +234,8 @@ class LuisManager:
             url=self.request_publish_url, 
             headers=self.authoring_headers,
             json=data)
-        if response.status_code < 400:
-            logging.info(f"Model published.")
-        else:
-            logging.warning(f"Problem: {response.json()['error']}")
+        alt_log_on_status(
+            response.status_code,
+            "Model published.",
+            f"Error at model publishing: {response.json()['error']}")
         return response

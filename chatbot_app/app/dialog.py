@@ -3,7 +3,7 @@ from uuid import uuid4
 from luis_functions import understand
 
 logging.basicConfig(
-    filename="conversations.log", 
+    filename="./conversations.log", 
     datefmt="%d/%m/%y %H:%M:%S",
     format="%(asctime)s: %(levelname)s: %(message)s",
     level=logging.INFO)
@@ -143,11 +143,11 @@ class Dialog:
         while True:
             if first_message:
                 print(self.messages[FIRST_MESSAGE], end=' ')
-
+                logging.info(f"{self.uuid} BOT: {self.messages[FIRST_MESSAGE]}")
 
             self.ask_till_all_elements_are_known()
             confirmation = self.ask_for_confirmation()
-            logging.info(f"{self.uuid}, USER: {confirmation}")
+            logging.info(f"{self.uuid} USER: {confirmation}")
 
             final_intent = understand(confirmation)['intent']
 

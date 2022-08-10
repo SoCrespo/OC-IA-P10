@@ -11,11 +11,13 @@ clientRuntime = LUISRuntimeClient(
     credentials=runtime_credentials)
 
 
-def understand(text):
-    """Return LUIS intent and entities for a given text."""
+def understand(text, prediction_func=clientRuntime.prediction.get_slot_prediction):
+    """
+    Return LUIS intent and entities for a given text.
+    """
     request = {"query": text}
-    result = clientRuntime.prediction.get_slot_prediction(
-        params.app_id, params.slot_name, request)
+    result = prediction_func(
+            params.app_id, params.slot_name, request)
     intent = result.prediction.top_intent
     entities = result.prediction.entities
     for key, value in entities.items():
@@ -26,5 +28,5 @@ def understand(text):
     return {'intent': intent, 'entities': result.prediction.entities}
 
 if __name__ == '__main__':
-    print(understand("Narp"))
+    print(understand("I want to fly to Madrid from Paris on the 25th of June"))
         
