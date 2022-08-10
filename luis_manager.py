@@ -34,6 +34,7 @@ class LuisManager:
         self.slot_name = slot_name
 
         self.request_authoring_url = f"{self.authoring_endpoint}luis/authoring/v3.0/apps/{self.app_id}/versions/{self.version_id}/"
+        self.request_publish_url = f'{self.authoring_endpoint}luis/authoring/v3.0-preview/apps/{self.app_id}/publish'
         self.request_batch_test_url = f'{self.prediction_endpoint}luis/v3.0-preview/apps/{self.app_id}/slots/{self.slot_name}/evaluations/'
         self.request_prediction_url = f'{self.prediction_endpoint}luis/prediction/v3.0/apps/{self.app_id}/slots/{self.slot_name}/'
 
@@ -46,25 +47,7 @@ class LuisManager:
         'Content-Type': 'application/json',
         'Ocp-Apim-Subscription-Key': self.prediction_key
         }
-
-    def _post(self, url_end, data, ):
-        """
-        Send data to self.request_authoring_url/url_end.
-        Return a requests.Response object.
-        """
-        url = self.request_authoring_url + url_end
-        response = requests.post(url, headers=self.authoring_headers, json=data)
-        return response
-   
-    def _get(self, url_end):
-        """
-        Get data from self.request_authoring_url/url_end.
-        Return a requests.Response object.
-        """
-        url = self.request_authoring_url + url_end
-        response = requests.get(url, headers=self.authoring_headers)
-        return response
-
+  
 
     def create_intent(self, intent_name):
         """
@@ -106,7 +89,7 @@ class LuisManager:
 
         Each labeled sample is sent as a separate request.
         Train data is a list of dicts with following format:
-        {'text': str, 
+        {'text': str  # an utterance
         'intentName': str, 
         'entityLabels': [
                         {
@@ -156,6 +139,7 @@ class LuisManager:
             logging.warning(f"Problem: {response.json()['error']}")
         return response    
 
+
     def get_prediction(self, sentence):
         """
         Get prediction from LUIS.
@@ -170,13 +154,7 @@ class LuisManager:
             logging.warning(f"Error at prediction: {response.json()['error']}")
         return response
 
-    def publish_model(self):
-        """
-        Publish model to production
-        to the published endpoint.
-        Return a requests.Response object.
-        """
-        raise NotImplementedError
+
 
     def upload_test_data(self, test_data):
         """
@@ -224,11 +202,23 @@ class LuisManager:
         response = requests.get(url, headers=self.prediction_headers)
         return response
 
+
     def publish_model(self):
         """
         Publish model to production
         to the published endpoint.
         Return a requests.Response object.
         """
-        raise NotImplementedError
-
+        data = {"versionId": self.version_id,
+                "isStaging": False, 
+                "directVersionPublish": False,
+                }
+        response = requests.post(
+            url=self.request_publish_url, 
+            headers=self.authoring_headers,
+            json=data)
+        if response.status_code < 400:
+            logging.info(f"Model published.")
+        else:
+            logging.warning(f"Problem: {response.json()['error']}")
+        return response
