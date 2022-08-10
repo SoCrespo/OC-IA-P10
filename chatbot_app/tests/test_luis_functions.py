@@ -10,10 +10,7 @@ app_path = chatbot_app_path/'app'
 sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
 ###############################################################################################################################
 
-
 from app.luis_functions import understand
-
-
 from dataclasses import dataclass, field
 
 @dataclass
