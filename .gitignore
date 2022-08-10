@@ -6,3 +6,9 @@
 /p10_venv
 /__pycache__
 params.py
+test_data.json
+train_agree.json
+train_disagree.json
+train_greeting.json
+train_inform.json
+
