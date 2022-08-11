@@ -1,13 +1,20 @@
 
-from dataclasses import dataclass, fields
-
-@dataclass 
 class Elements:
-    or_city: str = 'unknown'
-    dst_city: str = 'unknown'
-    str_date: str = 'unknown'
-    end_date: str = 'unknown'
-    budget: str = 'unknown'
-    
+    def __init__(self, default_value='unknown'):
+        self.or_city = default_value
+        self.dst_city = default_value
+        self.str_date = default_value
+        self.end_date = default_value
+        self.budget = default_value
+
+    @property
+    def elements(self):
+        return self.or_city, self.dst_city, self.str_date, self.end_date, self.budget
+
     def is_complete(self):
-        return all([item != 'unknown' for item in fields(self)])
+        return 'unknown' not in self.elements
+        
+    def reset_values(self):
+        return self.__init__()
+
+
