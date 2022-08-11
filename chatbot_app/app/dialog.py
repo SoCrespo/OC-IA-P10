@@ -49,14 +49,14 @@ class Dialog:
             FIRST_MESSAGE: "Hi, I'm your flight assistant.",
             START: "How can I help you?",
             NONE: "I'm sorry, I didn't understand. Could you rephrase please?",
-            STR_DATE_ENTITY: "On what date do you want to leave?",
-            END_DATE_ENTITY: "On what date do you want to come back?",
+            STR_DATE_ENTITY: "What is your departure date?",
+            END_DATE_ENTITY: "What is your return date?",
             DST_CITY_ENTITY: "Where do you want to fly to?",
             OR_CITY_ENTITY: "Where do you want to depart from?",
             BUDGET_ENTITY: "What is your budget?", 
             GREETING_INTENT: "I'm at your service!",
             AGREE_INTENT: "Great, let's find your flights!",
-            DISAGREE_INTENT: "I'm sorry, I'm trying to do my best. Thanks for your patience!",
+            DISAGREE_INTENT: "Sorry, I'm trying to do my best. Thanks for your patience!",
             }
 
 
