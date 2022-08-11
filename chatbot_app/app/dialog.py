@@ -1,5 +1,6 @@
 import logging
 from uuid import uuid4
+from elements import Elements
 from luis_functions import understand
 
 logging.basicConfig(
@@ -33,18 +34,17 @@ entities = [
         BUDGET_ENTITY,
     ]
 
-def summary_message(elements):
+def summary(elements):
     return ("Let's sum up: you want to book a flight " 
-            f"from {elements[OR_CITY_ENTITY]} "
-            f"to {elements[DST_CITY_ENTITY]}, "
-            f"leaving on {elements[STR_DATE_ENTITY]} "
-            f"and returning on {elements[END_DATE_ENTITY]},"
-            f" for a budget of {elements[BUDGET_ENTITY]}?")
+            f"from {getattr(elements, OR_CITY_ENTITY)} "
+            f"to {getattr(elements, DST_CITY_ENTITY)}, "
+            f"leaving on {getattr(elements, STR_DATE_ENTITY)} "
+            f"and returning on {getattr(elements, END_DATE_ENTITY)},"
+            f" for a budget of {getattr(elements, BUDGET_ENTITY)}?")
 
 class Dialog:
-    def __init__(self, entities=entities):
+    def __init__(self):
         self.uuid = uuid4()
-        self.elements = self.reset_elements()
         self.messages = {
             FIRST_MESSAGE: "Hi, I'm your flight assistant.",
             START: "How can I help you?",
@@ -59,53 +59,36 @@ class Dialog:
             DISAGREE_INTENT: "Sorry, I'm trying to do my best. Thanks for your patience!",
             }
 
-
-    @property
-    def all_elements_are_known(self):
-        return 'unknown' not in self.elements.values()
-
-    @property
-    def summary(self):
+    def _fix_end_date(self, elements, entities):
         """
-        Return updated summary of the flight with actual values.
-        """
-        return summary_message(self.elements)
-
-    def next_element_to_ask(self):
-        """
-        Return the first key of entities with 'unknown' value.
-        """
-        for element in self.elements:
-            if self.elements[element] == 'unknown':
-                return element
-    
-    def reset_elements(self):
-        """
-        Return dict with entities as keys and 'unknown' as values.
-        """
-        return dict.fromkeys(entities, 'unknown')
-
-    def _fix_end_date(self, entities):
-        """
-        If str_date already exist among self.elements,
+        If str_date already exist among elements,
         converts entities[STR_DATE_ENTITY] to entities[END_DATE_ENTITY].
         """
-        if self.elements[STR_DATE_ENTITY]!='unknown' and STR_DATE_ENTITY in entities:
+        if getattr(elements, STR_DATE_ENTITY)!='unknown' and STR_DATE_ENTITY in entities:
             end_date = entities.pop(STR_DATE_ENTITY)
             entities[END_DATE_ENTITY] = end_date
         return entities
 
-    def ask_till_all_elements_are_known(self):
+    def _update_elements(self, elements: Elements, entities: dict) -> Elements:
         """
-        Ask for missing elements until all keys of self.elements
+        Return elements updated with entities. 
+        """
+        for key, value in entities.items():
+            setattr(elements, key, value)
+        return elements
+
+
+    def ask_till_all_elements_are_known(self, elements):
+        """
+        Ask for missing elements until all keys of elements
         have a value (different from 'unknown').
         """
         topic = START
-        while not self.all_elements_are_known:
+        while not elements.is_complete():
             if not topic in self.messages:
                 logging.error(f'Unknown topic: {topic}')
                 topic = NONE
-            logging.info(f"{self.uuid}: elements = {self.elements}")    
+            logging.info(f"{self.uuid}: elements = {elements.elements}")    
             message = self.messages[topic]
             logging.info(f"{self.uuid} BOT: {message}")
 
@@ -118,24 +101,25 @@ class Dialog:
             luis_response = understand(text)
             intent, entities = luis_response['intent'], luis_response['entities']
             if entities:
-                entities = self._fix_end_date(entities)
-                self.elements.update(entities)
-                topic = self.next_element_to_ask()
+                entities = self._fix_end_date(elements, entities)
+                elements = self._update_elements(elements, entities)
+                topic = elements.next_unknown_element()
             else:
                 topic = intent if intent != 'inform' else NONE
+        return elements
 
-    def ask_for_confirmation(self):
+    def ask_for_confirmation(self, elements):
         """
         Ask for confirmation of all gathered data about the flight.
         Return the text typed by customer.
         """
-        message = self.summary
+        message = summary(elements)
         print(message)
         logging.info(f"{self.uuid} BOT: {message}")
         return input()
    
     
-    def main(self):
+    def main(self,elements):
         """
         Main dialog loop.
         """
@@ -145,8 +129,8 @@ class Dialog:
                 print(self.messages[FIRST_MESSAGE], end=' ')
                 logging.info(f"{self.uuid} BOT: {self.messages[FIRST_MESSAGE]}")
 
-            self.ask_till_all_elements_are_known()
-            confirmation = self.ask_for_confirmation()
+            elements = self.ask_till_all_elements_are_known(elements)
+            confirmation = self.ask_for_confirmation(elements)
             logging.info(f"{self.uuid} USER: {confirmation}")
 
             final_intent = understand(confirmation)['intent']
@@ -163,7 +147,7 @@ class Dialog:
                 logging.warning(f"{self.uuid} intent = {final_intent} *** FAIL***")
                 print(message)
                 logging.info(f"{self.uuid} BOT: {message}")
-                self.elements = self.reset_elements()
+                elements.reset_values()
                 first_message = False
 
             else:
@@ -173,7 +157,7 @@ class Dialog:
 
 
 if __name__ == '__main__':
-    
+    elements = Elements()
     dialog = Dialog()
-    dialog.main()
+    dialog.main(elements)
 

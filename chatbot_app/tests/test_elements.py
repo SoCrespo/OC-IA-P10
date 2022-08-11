@@ -28,7 +28,7 @@ def complete_elements():
     return complete_elements
 
 def test_elements_attributes_have_correct_names_and_values(empty_elements):
-    assert set(empty_elements.elements) == {'unknown'}
+    assert set(empty_elements.elements.values()) == {'unknown'}
 
 def test_elements_is_complete_true_if_complete(complete_elements):
     assert complete_elements.is_complete()
@@ -39,3 +39,9 @@ def test_elements_is_complete_false_if_not_complete(empty_elements):
 def test_elements_attributes_have_correct_names_and_values_after_reset(complete_elements):
     complete_elements.reset_values()
     assert complete_elements.__dict__ == dict.fromkeys(['or_city','dst_city', 'str_date', 'end_date', 'budget'], 'unknown')
+
+def test_next_unknown_element_returns_none(complete_elements):
+    assert complete_elements.next_unknown_element() is None
+
+def test_next_unknown_element_returns_first_unknown_element(empty_elements):
+    assert empty_elements.next_unknown_element() == 'or_city'
