@@ -49,8 +49,8 @@ class Dialog:
             FIRST_MESSAGE: "Hi, I'm your flight assistant.",
             START: "How can I help you?",
             NONE: "I'm sorry, I didn't understand. Could you rephrase please?",
-            STR_DATE_ENTITY: "When do you want to leave?",
-            END_DATE_ENTITY: "When do you want to come back?",
+            STR_DATE_ENTITY: "On what date do you want to leave?",
+            END_DATE_ENTITY: "On what date do you want to come back?",
             DST_CITY_ENTITY: "Where do you want to fly to?",
             OR_CITY_ENTITY: "Where do you want to depart from?",
             BUDGET_ENTITY: "What is your budget?", 
@@ -132,7 +132,7 @@ class Dialog:
         message = self.summary
         print(message)
         logging.info(f"{self.uuid} BOT: {message}")
-        return input('\n')
+        return input()
    
     
     def main(self):
