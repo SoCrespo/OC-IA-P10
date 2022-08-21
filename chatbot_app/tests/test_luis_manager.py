@@ -1,7 +1,7 @@
 # coding =utf-8
 
 ###############################################################################################################################
-# This code is necessary to import tested functions and their params
+# This code is necessary to import tested functions
 ###############################################################################################################################                                                                                                        #
 import sys
 from pathlib import Path
@@ -12,18 +12,22 @@ sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
 ###############################################################################################################################
 
 import pytest
-from app.luis_manager import LuisManager
-from app import params
+from dotenv import dotenv_values
+from types import SimpleNamespace
 
+config = SimpleNamespace(**dotenv_values())
+
+
+from app.luis_manager import LuisManager
 lm = LuisManager(
-    params.subscription_id,
-    params.app_id, 
-    params.version_id, 
-    params.authoring_key, 
-    params.authoring_endpoint, 
-    params.prediction_key,
-    params.prediction_endpoint,
-    params.slot_name,
+    config.subscription_id,
+    config.app_id, 
+    config.version_id, 
+    config.authoring_key, 
+    config.authoring_endpoint, 
+    config.prediction_key,
+    config.prediction_endpoint,
+    config.slot_name,
 )
 
 def test_lm_attributes_not_empty():

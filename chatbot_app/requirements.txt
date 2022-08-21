@@ -42,3 +42,4 @@ whichcraft==0.6.1
 yarl==1.4.2
 pandas
 numpy
+python-dotenv

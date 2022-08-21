@@ -5,7 +5,7 @@
 /frames.zip
 /p10_venv
 **/__pycache__
-params.py
+.env
 test_data.json
 train_agree.json
 train_disagree.json
@@ -13,4 +13,4 @@ train_greeting.json
 train_inform.json
 sample.json
 
-chatbot_app/app/luis_manager.py
+

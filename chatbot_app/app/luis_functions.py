@@ -1,13 +1,15 @@
 # encoding = utf-8
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
-import params
+from dotenv import dotenv_values
+from types import SimpleNamespace
+config = SimpleNamespace(**dotenv_values())
 
 runtime_credentials = CognitiveServicesCredentials(
-    params.prediction_key)
+    config.prediction_key)
 
 clientRuntime = LUISRuntimeClient(
-    endpoint=params.prediction_endpoint, 
+    endpoint=config.prediction_endpoint, 
     credentials=runtime_credentials)
 
 
@@ -17,7 +19,7 @@ def understand(text, prediction_func=clientRuntime.prediction.get_slot_predictio
     """
     request = {"query": text}
     result = prediction_func(
-            params.app_id, params.slot_name, request)
+            config.app_id, config.slot_name, request)
     intent = result.prediction.top_intent
     entities = result.prediction.entities
     for key, value in entities.items():
