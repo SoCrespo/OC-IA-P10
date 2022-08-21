@@ -2,7 +2,7 @@ import logging
 from uuid import uuid4
 from elements import Elements
 from luis_functions import understand
-from chatbot_app.app.entities_and_intents import *
+from entities_and_intents import *
 
 logging.basicConfig(
     filename="./conversations.log", 
@@ -12,8 +12,6 @@ logging.basicConfig(
 
 FIRST_MESSAGE = 'first_message'
 START = 'start'
-SUMMARIZE = 'summarize'
-NONE = 'None'
 
 def summary(elements):
     return ("Let's sum up: you want to book a flight " 
@@ -29,15 +27,15 @@ class Dialog:
         self.messages = {
             FIRST_MESSAGE: "Hi, I'm your flight assistant.",
             START: "How can I help you?",
-            NONE: "I'm sorry, I didn't understand. Could you rephrase please?",
+            NONE_INTENT: "I'm sorry, I didn't understand. Could you rephrase please?",
+            GREETING_INTENT: "I'm at your service!",
+            AGREE_INTENT: "Great, let's find your flights!",
+            DISAGREE_INTENT: "Sorry, I'm trying to do my best. Thanks for your patience!",
             STR_DATE_ENTITY: "What is your departure date?",
             END_DATE_ENTITY: "What is your return date?",
             DST_CITY_ENTITY: "Where do you want to fly to?",
             OR_CITY_ENTITY: "Where do you want to depart from?",
             BUDGET_ENTITY: "What is your budget?", 
-            GREETING_INTENT: "I'm at your service!",
-            AGREE_INTENT: "Great, let's find your flights!",
-            DISAGREE_INTENT: "Sorry, I'm trying to do my best. Thanks for your patience!",
             }
 
     def _fix_end_date(self, elements, entities):
@@ -68,14 +66,14 @@ class Dialog:
         while not elements.is_complete():
             if not topic in self.messages:
                 logging.error(f'Unknown topic: {topic}')
-                topic = NONE
+                topic = NONE_INTENT
             logging.info(f"{self.uuid}: elements = {elements.elements}")    
             message = self.messages[topic]
             logging.info(f"{self.uuid} BOT: {message}")
 
             text = input(message + '\n')
             if not text:
-                topic = NONE
+                topic = NONE_INTENT
                 continue
 
             logging.info(f"{self.uuid} USER: {text}")
@@ -86,7 +84,7 @@ class Dialog:
                 elements = self._update_elements(elements, entities)
                 topic = elements.next_unknown_element()
             else:
-                topic = intent if intent != 'inform' else NONE
+                topic = intent if intent != 'inform' else NONE_INTENT
         return elements
 
     def ask_for_confirmation(self, elements):
@@ -132,7 +130,7 @@ class Dialog:
                 first_message = False
 
             else:
-                message = self.messages[NONE]
+                message = self.messages[NONE_INTENT]
                 logging.info(f"{self.uuid} intent = {final_intent}")
                 logging.info(f"{self.uuid} BOT: {message}")
 
