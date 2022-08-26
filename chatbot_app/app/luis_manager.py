@@ -4,13 +4,14 @@ import requests
 
 logging.basicConfig(level=logging.INFO)
 
-def log_and_raise_error(status_code, message_info, message_error, threshold=300):
+def log_and_raise_error(response, message_info, message_error, threshold=300):
     """
-    Log messages according to status code.
+    Log messages according to response.
     """
-    if status_code >= threshold:
-        logging.error(message_error)
-        raise Exception(message_error)
+    if response.status_code >= threshold:
+        full_message = f"{message_error} {response.json()['error']}"
+        logging.error(full_message)
+        raise Exception(full_message)
     else:
         logging.info(message_info)
 
@@ -35,6 +36,7 @@ class LuisManager:
         - upload test data
         - get test status
         - publish model.
+        - get prediction.
         """
         self.subscription_id=subscription_id
         self.app_id = app_id
@@ -72,9 +74,9 @@ class LuisManager:
         data = {'name': intent_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
         log_and_raise_error(
-            response.status_code, 
+            response, 
             f"Intent {intent_name} created.", 
-            f"Intent {intent_name} not created: {response.json()['error']}")
+            f"Intent {intent_name} not created")
         return response
         
 
@@ -88,9 +90,9 @@ class LuisManager:
         data = {'name': entity_name}
         response = requests.post(url, headers=self.authoring_headers, json=data)
         log_and_raise_error(
-            response.status_code,
+            response,
             f"Entity {entity_name} created.",
-            f"Entity {entity_name} not created: {response.json()['error']}")
+            f"Entity {entity_name} not created")
         return response
 
         
@@ -117,9 +119,9 @@ class LuisManager:
         url = self.request_authoring_url + "examples"
         response = requests.post(url, headers=self.authoring_headers, json=samples_list)
         log_and_raise_error(
-            response.status_code,
+            response,
             f"Samples uploaded.",
-            f"Samples not uploaded: {response.json()['error']}")
+            f"Samples not uploaded")
         return response
 
 
@@ -132,9 +134,9 @@ class LuisManager:
         url = self.request_authoring_url + "train"
         response = requests.post(url, headers=self.authoring_headers, data={})
         log_and_raise_error(
-            response.status_code,
+            response,
             "Training launched.",
-            f"Error at training lauching: {response.json()['error']}")
+            "Error at training lauching")
         return response
 
         
@@ -146,25 +148,10 @@ class LuisManager:
         url = self.request_authoring_url + "train"
         response = requests.get(url, headers=self.authoring_headers)
         log_and_raise_error(
-            response.status_code,
+            response,
             "Model trained.",
-            f"Error at training: {response.json()['error']}")
+            "Error at training")
         return response    
-
-
-    def get_prediction(self, sentence):
-        """
-        Get prediction from LUIS.
-        Return a dict.
-        """
-        url = self.request_prediction_url + "predict"
-        data = {"query": sentence}
-        response = requests.post(url, headers=self.prediction_headers, json=data)
-        log_and_raise_error(
-            response.status_code,
-            "Prediction received.",
-            f"Error at prediction: {response.json()['error']}")
-        return response
 
     def upload_test_data(self, test_data):
         """
@@ -187,9 +174,9 @@ class LuisManager:
         data = {"LabeledTestSetUtterances": test_data}
         response = requests.post(url, headers=self.prediction_headers, json=data)
         log_and_raise_error(
-            response.status_code,
+            response,
             "Test data uploaded.",
-            f"Error at test data upload: {response.json()['error']}")
+            "Error at test data upload")
         return response
 
 
@@ -201,9 +188,9 @@ class LuisManager:
         url = self.request_batch_test_url + f"{operation_id}/status"
         response = requests.get(url, headers=self.prediction_headers)
         log_and_raise_error(
-            response.status_code,
+            response,
             "Test status received.",
-            f"Error at test status: {response.json()['error']}")
+            "Error at test status")
         return response
 
 
@@ -215,9 +202,9 @@ class LuisManager:
         url = self.request_batch_test_url + f"{operation_id}/result"
         response = requests.get(url, headers=self.prediction_headers)
         log_and_raise_error(
-            response.status_code,
+            response,
             "Test result received.",
-            f"Error at test result: {response.json()['error']}")
+            "Error at test result")
         return response
 
 
@@ -236,7 +223,22 @@ class LuisManager:
             headers=self.authoring_headers,
             json=data)
         log_and_raise_error(
-            response.status_code,
+            response,
             "Model published.",
-            f"Error at model publishing: {response.json()['error']}")
+            "Error at model publishing")
+        return response
+
+
+    def get_prediction_response(self, sentence):
+        """
+        Get prediction from LUIS.
+        Return a requests.Response object.
+        """
+        url = self.request_prediction_url + "predict"
+        data = {"query": sentence}
+        response = requests.post(url, headers=self.prediction_headers, json=data)
+        log_and_raise_error(
+            response,
+            "Prediction received.",
+            "Error at prediction")
         return response
