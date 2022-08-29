@@ -11,7 +11,7 @@ sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
 ###############################################################################################################################
 
 import pytest
-from app.elements import Elements
+from bot.elements import Elements
 
 @pytest.fixture
 def empty_elements():

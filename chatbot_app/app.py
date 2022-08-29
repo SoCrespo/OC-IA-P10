@@ -1,8 +1,8 @@
 import logging
 from uuid import uuid4
-from elements import Elements
-from luis_functions import understand
-from entities_and_intents import *
+from bot.elements import Elements
+from bot.luis_functions import understand
+from bot.entities_and_intents import *
 
 logging.basicConfig(
     filename="./conversations.log", 

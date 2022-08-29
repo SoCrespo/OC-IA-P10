@@ -1,8 +1,8 @@
 # encoding = utf-8
 from dotenv import dotenv_values
 
-from luis_manager import LuisManager
-from luis_prediction import LuisPrediction
+from .luis_manager import LuisManager
+from .luis_prediction import LuisPrediction
 
 lm = LuisManager(**dotenv_values())
 

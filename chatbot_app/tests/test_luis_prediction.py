@@ -11,7 +11,7 @@ sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
 ###############################################################################################################################
 
 import pytest
-from app.luis_prediction import LuisPrediction
+from bot.luis_prediction import LuisPrediction
 
 class MockResponse:
     def __init__(self, json: dict):
