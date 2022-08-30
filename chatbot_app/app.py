@@ -2,7 +2,7 @@ import logging
 from uuid import uuid4
 from bot.elements import Elements
 from luis_tools.luis_functions import understand
-from bot.entities_and_intents import *
+from entities_and_intents import *
 
 logging.basicConfig(
     filename="./conversations.log", 
