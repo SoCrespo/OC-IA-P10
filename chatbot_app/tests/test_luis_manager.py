@@ -17,7 +17,7 @@ from types import SimpleNamespace
 
 config = SimpleNamespace(**dotenv_values())
 
-from bot.luis_manager import LuisManager
+from luis_tools.luis_manager import LuisManager
 lm = LuisManager(
     config.subscription_id,
     config.app_id, 
