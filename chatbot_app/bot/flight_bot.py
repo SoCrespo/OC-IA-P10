@@ -26,4 +26,4 @@ class FlightBot(ActivityHandler):
         luis_response = understand(user_input)
 
         return await turn_context.send_activity(
-            MessageFactory.text(f"intent = {luis_response.intent}, entities = {luis_response.entities}"))
+            MessageFactory.text(f"intent = {luis_response.intent}, entities = {str(luis_response.entities.values())}"))
