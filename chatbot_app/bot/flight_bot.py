@@ -21,7 +21,7 @@ class FlightBot(ActivityHandler):
 
 
     async def on_message_activity(self, turn_context: TurnContext):
-        """Echoes user input back to them."""
+        """Display user intent and entities."""
         user_input = turn_context.activity.text
         luis_response = understand(user_input)
 
