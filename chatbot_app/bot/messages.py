@@ -1,0 +1,1 @@
+WELCOME = """Hi! I'm your flight reservation assistant. How can I help you?"""
