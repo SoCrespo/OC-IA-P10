@@ -1,17 +1,5 @@
-# coding =utf-8
-###############################################################################################################################
-# This code is necessary to import tested functions and their params
-###############################################################################################################################                                                                                                        #
-import sys
-from pathlib import Path
-p = Path(__file__)
-chatbot_app_path = p.parent.parent
-app_path = chatbot_app_path/'app'
-sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
-###############################################################################################################################
-
 import pytest
-from bot.elements import Elements
+from chatbot_app.bot.elements import Elements
 
 @pytest.fixture
 def empty_elements():

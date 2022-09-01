@@ -1,24 +1,13 @@
 # coding =utf-8
 
-###############################################################################################################################
-# This code is necessary to import tested functions
-###############################################################################################################################                                                                                                        #
-import sys
-from pathlib import Path
-p = Path(__file__)
-chatbot_app_path = p.parent.parent
-app_path = chatbot_app_path/'app'
-sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
-###############################################################################################################################
 
-import pytest
 from dotenv import dotenv_values
 from types import SimpleNamespace
 
 luis_params = {key: value for key, value in dotenv_values().items() if key.startswith('luis_')}
 config = SimpleNamespace(**luis_params)
 
-from luis_tools.luis_manager import LuisManager
+from chatbot_app.luis_tools.luis_manager import LuisManager
 lm = LuisManager(
     config.luis_subscription_id,
     config.luis_app_id, 

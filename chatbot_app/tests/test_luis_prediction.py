@@ -1,17 +1,7 @@
 # coding =utf-8
-###############################################################################################################################
-# This code is necessary to import tested functions and their params
-###############################################################################################################################                                                                                                        #
-import sys
-from pathlib import Path
-p = Path(__file__)
-chatbot_app_path = p.parent.parent
-app_path = chatbot_app_path/'app'
-sys.path.extend([chatbot_app_path.as_posix(), app_path.as_posix()])
-###############################################################################################################################
 
 import pytest
-from luis_tools.luis_prediction import LuisPrediction
+from chatbot_app.luis_tools.luis_prediction import LuisPrediction
 
 class MockResponse:
     def __init__(self, json: dict):
