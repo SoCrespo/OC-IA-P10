@@ -62,4 +62,4 @@ def test_luis_prediction_has_intent(prediction):
 
 def test_luis_prediction_has_entities(prediction):
     result = LuisPrediction(prediction)
-    assert result.entities == {'dst_city': ['London']}
+    assert result.entities == {'dst_city': 'London'}

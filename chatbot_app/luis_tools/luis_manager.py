@@ -18,14 +18,14 @@ def log_and_raise_error(response, message_info, message_error, threshold=300):
 
 class LuisManager:
     def __init__(self, 
-                subscription_id,
-                app_id, 
-                version_id,
-                authoring_key, 
-                authoring_endpoint,
-                prediction_key,
-                prediction_endpoint,
-                slot_name): 
+                luis_subscription_id,
+                luis_app_id, 
+                luis_version_id,
+                luis_authoring_key, 
+                luis_authoring_endpoint,
+                luis_prediction_key,
+                luis_prediction_endpoint,
+                luis_slot_name): 
                 
         """
         Manage interactions with existing Luis model:
@@ -38,14 +38,14 @@ class LuisManager:
         - publish model.
         - get prediction.
         """
-        self.subscription_id=subscription_id
-        self.app_id = app_id
-        self.version_id = version_id
-        self.authoring_key = authoring_key
-        self.authoring_endpoint = authoring_endpoint
-        self.prediction_key = prediction_key
-        self.prediction_endpoint = prediction_endpoint
-        self.slot_name = slot_name
+        self.subscription_id=luis_subscription_id
+        self.app_id = luis_app_id
+        self.version_id = luis_version_id
+        self.authoring_key = luis_authoring_key
+        self.authoring_endpoint = luis_authoring_endpoint
+        self.prediction_key = luis_prediction_key
+        self.prediction_endpoint = luis_prediction_endpoint
+        self.slot_name = luis_slot_name
 
         self.request_authoring_url = f"{self.authoring_endpoint}luis/authoring/v3.0/apps/{self.app_id}/versions/{self.version_id}/"
         self.request_publish_url = f'{self.authoring_endpoint}luis/authoring/v3.0-preview/apps/{self.app_id}/publish'
@@ -242,3 +242,9 @@ class LuisManager:
             "Prediction received.",
             "Error at prediction")
         return response
+
+if __name__ == '__main__':
+    from dotenv import dotenv_values
+    luis_params = {key: value for key, value in dotenv_values().items() if key.startswith('luis')}
+    lm = LuisManager(**luis_params)
+    print(lm.get_prediction_response('I want to go to Montreal From Paris on september 25th').__dict__)
