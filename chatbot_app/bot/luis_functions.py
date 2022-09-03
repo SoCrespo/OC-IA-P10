@@ -1,8 +1,8 @@
 # encoding = utf-8
 from dotenv import dotenv_values
 
-from .luis_manager import LuisManager
-from .luis_prediction import LuisPrediction
+from luis_tools.luis_manager import LuisManager
+from luis_tools.luis_prediction import LuisPrediction
 
 luis_params = {key: value for key, value in dotenv_values().items() if key.startswith('luis_')}
 lm = LuisManager(**luis_params)

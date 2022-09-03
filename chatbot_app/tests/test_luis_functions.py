@@ -1,4 +1,4 @@
-from chatbot_app.luis_tools.luis_functions import understand
+from chatbot_app.bot.luis_functions import understand
 from chatbot_app.luis_tools.luis_prediction import LuisPrediction
 from chatbot_app import entities_and_intents as ei
 
