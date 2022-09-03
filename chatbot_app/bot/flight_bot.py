@@ -2,9 +2,8 @@ from typing import List
 from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount
 from bot.elements import Elements
-from luis_tools.luis_functions import understand
+from bot.luis_functions import understand
 from entities_and_intents import *
-
 from . import messages as msg
 
 class FlightBot(ActivityHandler):
@@ -24,6 +23,9 @@ class FlightBot(ActivityHandler):
         """Display user intent and entities."""
         user_input = turn_context.activity.text
         luis_response = understand(user_input)
-
-        return await turn_context.send_activity(
-            MessageFactory.text(f"intent = {luis_response.intent}, entities = {str(luis_response.entities.values())}"))
+        if luis_response.entities:
+            entities_as_str = ', '.join([f'{key}: {value}' for key, value in luis_response.entities.items()])
+        else:
+            entities_as_str = 'none'
+        text = f"intent = {luis_response.intent}, entities = {entities_as_str}"
+        return await turn_context.send_activity(MessageFactory.text(text))
