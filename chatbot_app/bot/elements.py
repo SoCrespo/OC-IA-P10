@@ -26,7 +26,20 @@ class Elements:
         """
         unknown = [key for key, value in self.elements.items() if value == 'unknown']
         return unknown[0] if unknown else None
-        
+
+    def summarize(self) -> str:
+        """
+        Return a summary of the attributes if all are known.
+        """
+        if self.is_complete():
+            return (
+                f"You want to fly from {self.or_city} to {self.dst_city}, "
+                f"departing on {self.str_date} and coming back on {self.end_date}, "
+                f"with a budget of {self.budget}."
+                ) 
+        else:
+            return "I don't have enough information to summarize your request."
+
     def reset_values(self):
         return self.__init__()
 

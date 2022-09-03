@@ -33,3 +33,13 @@ def test_next_unknown_element_returns_none(complete_elements):
 
 def test_next_unknown_element_returns_first_unknown_element(empty_elements):
     assert empty_elements.next_unknown_element() == 'or_city'
+
+def test_summarize_returns_correct_string(complete_elements):
+    assert complete_elements.summarize() == (
+        "You want to fly from Madrid to Barcelona, "
+        "departing on 01/01/2019 and coming back on 01/01/2019, "
+        "with a budget of 1000."
+        )
+
+def test_summarize_returns_correct_string_if_not_complete(empty_elements):
+    assert empty_elements.summarize() == "I don't have enough information to summarize your request."
