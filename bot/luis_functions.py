@@ -1,10 +1,12 @@
 # encoding = utf-8
-from dotenv import dotenv_values
+from dotenv import load_dotenv
+import os
 
 from luis_tools.luis_manager import LuisManager
 from luis_tools.luis_prediction import LuisPrediction
 
-luis_params = {key: value for key, value in dotenv_values().items() if key.startswith('luis_')}
+load_dotenv()
+luis_params = {key: value for key, value in os.environ.items() if key.startswith("luis_")}
 lm = LuisManager(**luis_params)
 
 def understand(text, prediction_func=lm.get_prediction_response) -> LuisPrediction:

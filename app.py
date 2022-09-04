@@ -1,5 +1,6 @@
 
-from dotenv import dotenv_values
+from dotenv import load_dotenv
+import os
 from types import SimpleNamespace
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
@@ -8,7 +9,8 @@ from botbuilder.schema import Activity
 from botbuilder.core import BotFrameworkAdapterSettings, BotFrameworkAdapter
 from bot.flight_bot import FlightBot
 
-config = SimpleNamespace(**dotenv_values())
+load_dotenv()
+config = SimpleNamespace(**os.environ)
 settings= BotFrameworkAdapterSettings(config.bot_app_id, config.bot_app_password)
 adapter = BotFrameworkAdapter(settings)
 bot = FlightBot()
