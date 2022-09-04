@@ -41,8 +41,8 @@ async def health(req: Request) -> Response:
 
 
 chatbot = web.Application()
-chatbot.router.add_post("/api/messages", messages)
-chatbot.router.add_get("/api/messages", health)
+chatbot.router.add_post("", messages)
+chatbot.router.add_get("", health)
 
 if __name__ == "__main__":
     web.run_app(chatbot, port=config.PORT)
