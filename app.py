@@ -45,4 +45,4 @@ chatbot.router.add_post("/api/messages", messages)
 chatbot.router.add_get("/api/messages", health)
 
 if __name__ == "__main__":
-    web.run_app(chatbot, port=config.bot_port)
+    web.run_app(chatbot, port=config.PORT)
