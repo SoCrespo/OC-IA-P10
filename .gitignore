@@ -6,6 +6,8 @@
 /p10_venv
 **/__pycache__
 .env
+.venv
+.vscode
 test_data.json
 train_agree.json
 train_disagree.json
