@@ -1,5 +1,6 @@
 
-aiohttp==3.8.1
+
+aiohttp>=3.6.2,<3.8.0  
 applicationinsights==0.11.9
 asyncio==3.4.3
 botbuilder-ai==4.14.2
