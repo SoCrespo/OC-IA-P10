@@ -38,12 +38,12 @@ async def health(req: web.Request) -> web.Response:
     """
     return web.Response(text="App is running")
 
-def init_func():
+def init_func(argv):
     app = web.Application()
     app.router.add_post("", messages)
     app.router.add_get("", health)
     return app
 
 if __name__ == "__main__":
-    chatbot = init_func()
+    chatbot = init_func(None)
     web.run_app(chatbot, port=config.PORT)
