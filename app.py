@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import os
 from types import SimpleNamespace
 from aiohttp import web
-from aiohttp.web import Request, Response, json_response
 from http import HTTPStatus
 from botbuilder.schema import Activity
 from botbuilder.core import BotFrameworkAdapterSettings, BotFrameworkAdapter
@@ -15,12 +14,12 @@ settings= BotFrameworkAdapterSettings(config.bot_app_id, config.bot_app_password
 adapter = BotFrameworkAdapter(settings)
 bot = FlightBot()
 
-async def messages(req: Request) -> Response:
+async def messages(req: web.Request) -> web.Response:
     """
     Main bot message handler.
     """
     if "application/json" not in req.headers["Content-Type"]:
-        return Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
+        return web.Response(status=HTTPStatus.UNSUPPORTED_MEDIA_TYPE)
 
     body = await req.json()
     activity = Activity().deserialize(body)
@@ -29,11 +28,11 @@ async def messages(req: Request) -> Response:
     response = await adapter.process_activity(activity, auth_header, bot.on_turn)
     
     if response:
-        return json_response(data=response.body, status=response.status)
-    return Response(status=HTTPStatus.OK)
+        return web.json_response(data=response.body, status=response.status)
+    return web.Response(status=HTTPStatus.OK)
 
 
-async def health(req: Request) -> Response:
+async def health(req: web.Request) -> web.Response:
     """
     Check endpoint health.
     """
