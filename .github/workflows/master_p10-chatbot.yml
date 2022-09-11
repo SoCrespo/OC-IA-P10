@@ -31,10 +31,7 @@ jobs:
         run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      - name: Test with pytest
-        run: |
-          python -m pytest
-
+      
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
@@ -63,4 +60,4 @@ jobs:
         with:
           app-name: 'p10-chatbot'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_648359368E0F45AB85C31312AC3BCB1F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BE0CE655B9E541B38818D027A1135490 }}
