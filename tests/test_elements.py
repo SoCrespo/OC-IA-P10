@@ -1,5 +1,5 @@
 import pytest
-from chatbot_app.bot.elements import Elements
+from ..bot.elements import Elements
 
 @pytest.fixture
 def empty_elements():
