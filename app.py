@@ -1,4 +1,9 @@
-
+import sys
+print('**********************')
+print('Starting app.py')
+print('sys.path[0] is:')
+print(sys.path[0])
+print('**********************')
 from dotenv import load_dotenv
 import os
 from types import SimpleNamespace
