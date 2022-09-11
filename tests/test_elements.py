@@ -1,5 +1,9 @@
 import pytest
-from ..bot.elements import Elements
+try:
+    from ..bot.elements import Elements
+except ValueError as e:
+    import sys
+    raise ValueError(f"Problème : {sys.path[0]}")
 
 @pytest.fixture
 def empty_elements():
