@@ -2,11 +2,9 @@ print(__name__)
 import pytest
 import sys
 import logging
-try:
-    from ..bot.elements import Elements
-except ValueError as e:
-    raise ValueError(f"Problème : {__name__}")
-logging.warning(f"\n# # # # # # # : \n{sys.path[0]}\n# # # # # # #")
+
+from .bot.elements import Elements
+
 @pytest.fixture
 def empty_elements():
     return Elements()
