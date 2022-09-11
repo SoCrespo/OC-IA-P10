@@ -3,7 +3,7 @@ import pytest
 import sys
 import logging
 
-from .bot.elements import Elements
+from common.bot.elements import Elements
 
 @pytest.fixture
 def empty_elements():

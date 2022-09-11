@@ -2,8 +2,8 @@
 from dotenv import load_dotenv
 import os
 
-from luis_tools.luis_manager import LuisManager
-from luis_tools.luis_prediction import LuisPrediction
+from common.luis_tools.luis_manager import LuisManager
+from common.luis_tools.luis_prediction import LuisPrediction
 
 load_dotenv()
 luis_params = {key: value for key, value in os.environ.items() if key.startswith("luis_")}

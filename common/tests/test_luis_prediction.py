@@ -1,7 +1,7 @@
 # coding =utf-8
 
 import pytest
-from ..luis_tools.luis_prediction import LuisPrediction
+from common.luis_tools.luis_prediction import LuisPrediction
 
 class MockResponse:
     def __init__(self, json: dict):

@@ -7,7 +7,7 @@ from types import SimpleNamespace
 luis_params = {key: value for key, value in dotenv_values().items() if key.startswith('luis_')}
 config = SimpleNamespace(**luis_params)
 
-from ..luis_tools.luis_manager import LuisManager
+from common.luis_tools.luis_manager import LuisManager
 lm = LuisManager(
     config.luis_subscription_id,
     config.luis_app_id, 

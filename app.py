@@ -11,7 +11,7 @@ from aiohttp import web
 from http import HTTPStatus
 from botbuilder.schema import Activity
 from botbuilder.core import BotFrameworkAdapterSettings, BotFrameworkAdapter
-from bot.flight_bot import FlightBot
+from common.bot.flight_bot import FlightBot
 
 load_dotenv()
 config = SimpleNamespace(**os.environ)

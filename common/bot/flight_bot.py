@@ -1,8 +1,8 @@
 from typing import List
 from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount
-from bot.elements import Elements
-from bot.luis_functions import understand
+from common.bot.elements import Elements
+from common.bot.luis_functions import understand
 from entities_and_intents import *
 from . import messages as msg
 
