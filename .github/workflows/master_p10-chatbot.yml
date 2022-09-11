@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - p10-chatbot
 on:
   push:
     branches:
-      - master
+      - fix_imports
   workflow_dispatch:
 
 jobs:

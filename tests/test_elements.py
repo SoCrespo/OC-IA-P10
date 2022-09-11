@@ -1,3 +1,4 @@
+print(__name__)
 import pytest
 import sys
 import logging
