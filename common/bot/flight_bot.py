@@ -3,7 +3,7 @@ from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount
 from common.bot.elements import Elements
 from common.bot.luis_functions import understand
-from entities_and_intents import *
+import entities_and_intents as ei
 from . import messages as msg
 
 class FlightBot(ActivityHandler):
@@ -18,9 +18,9 @@ class FlightBot(ActivityHandler):
         If str_date already exist among self.elements,
         converts entities[STR_DATE_ENTITY] to entities[END_DATE_ENTITY].
         """
-        if getattr(self.elements, STR_DATE_ENTITY)!='unknown' and STR_DATE_ENTITY in entities:
-            end_date = entities.pop(STR_DATE_ENTITY)
-            entities[END_DATE_ENTITY] = end_date
+        if getattr(self.elements, ei.STR_DATE_ENTITY)!='unknown' and ei.STR_DATE_ENTITY in entities:
+            end_date = entities.pop(ei.STR_DATE_ENTITY)
+            entities[ei.END_DATE_ENTITY] = end_date
         return entities    
 
     def _update_elements(self, entities: dict) -> None:
