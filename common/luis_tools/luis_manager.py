@@ -239,7 +239,7 @@ class LuisManager:
         response = requests.post(url, headers=self.prediction_headers, json=data)
         log_and_raise_error(
             response,
-            "Prediction received.",
+            f"Prediction received: {response.json()}",
             "Error at prediction")
         return response
 
