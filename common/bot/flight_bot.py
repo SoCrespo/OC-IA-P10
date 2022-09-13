@@ -51,9 +51,15 @@ class FlightBot(ActivityHandler):
         self._update_elements(fixed_entities)
                 
         if self.elements.is_complete():
-            text = self.elements.summarize()
-        else:
+            if intent == ei.AGREE_INTENT:
+                text = msg.AGREE_INTENT
+            elif intent == ei.DISAGREE_INTENT:
+                text = msg.DISAGREE_INTENT  
+                self.elements.reset_values()
+            else:    
+                text = self.elements.summarize() + msg.ASK_CONFIRMATION
 
+        else:
             if len(entities) > 0:
                 next_element_to_get = self.elements.next_unknown_element()
                 text = msg.element_to_get_dict[next_element_to_get]
@@ -61,5 +67,5 @@ class FlightBot(ActivityHandler):
                 text = msg.GREETING_INTENT
             else:
                 text = msg.NONE_INTENT
-            text = f"intent: {intent}, text: {text}"
+
         return await turn_context.send_activity(MessageFactory.text(text))
