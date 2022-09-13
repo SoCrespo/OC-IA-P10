@@ -10,11 +10,34 @@ class FlightBot(ActivityHandler):
     """
     A simple echo bot at this stage.
     """
+    def create_elements(self):
+        self.elements = Elements()
+
+    def _fix_end_date(self, entities):
+        """
+        If str_date already exist among self.elements,
+        converts entities[STR_DATE_ENTITY] to entities[END_DATE_ENTITY].
+        """
+        if getattr(self.elements, STR_DATE_ENTITY)!='unknown' and STR_DATE_ENTITY in entities:
+            end_date = entities.pop(STR_DATE_ENTITY)
+            entities[END_DATE_ENTITY] = end_date
+        return entities    
+
+    def _update_elements(self, entities: dict) -> None:
+        """
+        Update self.elements with entities. 
+        """
+        for key, value in entities.items():
+            setattr(self.elements, key, value)
+
+
+
     async def on_members_added_activity(
         self, members_added: List[ChannelAccount], turn_context: TurnContext):  
         """
         Welcome user.
         """
+        self.create_elements()
         return await turn_context.send_activity(
             MessageFactory.text(msg.WELCOME))
 
@@ -23,9 +46,8 @@ class FlightBot(ActivityHandler):
         """Display user intent and entities."""
         user_input = turn_context.activity.text
         luis_response = understand(user_input)
-        if luis_response.entities:
-            entities_as_str = ', '.join([f'{key}: {value}' for key, value in luis_response.entities.items()])
-        else:
-            entities_as_str = 'none'
-        text = f"intent = {luis_response.intent}, entities = {entities_as_str}"
+        intent, entities = luis_response.intent, luis_response.entities
+        entities = self._fix_end_date(entities)
+        self._update_elements(entities)
+        text = f"{self.elements.summarize()}"
         return await turn_context.send_activity(MessageFactory.text(text))
