@@ -49,5 +49,5 @@ class FlightBot(ActivityHandler):
         intent, entities = luis_response.intent, luis_response.entities
         entities = self._fix_end_date(entities)
         self._update_elements(entities)
-        text = f"{self.elements.summarize()}"
+        text = f"{self.elements.__dict__.items()}"
         return await turn_context.send_activity(MessageFactory.text(text))
