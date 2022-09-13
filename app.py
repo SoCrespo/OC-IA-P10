@@ -1,11 +1,13 @@
 
-from dotenv import load_dotenv
+from http import HTTPStatus
 import os
 from types import SimpleNamespace
+
+from dotenv import load_dotenv
 from aiohttp import web
-from http import HTTPStatus
-from botbuilder.schema import Activity
 from botbuilder.core import BotFrameworkAdapterSettings, BotFrameworkAdapter
+from botbuilder.schema import Activity
+
 from common.bot.flight_bot import FlightBot
 
 load_dotenv()
