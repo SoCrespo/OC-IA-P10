@@ -6,6 +6,7 @@ from common.bot.luis_functions import understand
 import entities_and_intents as ei
 from . import messages as msg
 
+
 class FlightBot(ActivityHandler):
     """
     A simple echo bot at this stage.
@@ -31,7 +32,6 @@ class FlightBot(ActivityHandler):
             setattr(self.elements, key, value)
 
 
-
     async def on_members_added_activity(
         self, members_added: List[ChannelAccount], turn_context: TurnContext):  
         """
@@ -39,7 +39,7 @@ class FlightBot(ActivityHandler):
         """
         self.create_elements()
         return await turn_context.send_activity(
-            MessageFactory.text(msg.WELCOME))
+            MessageFactory.text(msg.messages_dict['WELCOME']))
 
 
     async def on_message_activity(self, turn_context: TurnContext):
@@ -49,6 +49,7 @@ class FlightBot(ActivityHandler):
         intent, entities = luis_response.intent, luis_response.entities
         fixed_entities = self._fix_end_date(entities)
         self._update_elements(fixed_entities)
+
 
         text = f"{self.elements.__dict__.items()}"
         return await turn_context.send_activity(MessageFactory.text(text))
