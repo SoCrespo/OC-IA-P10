@@ -1,8 +1,8 @@
 import logging
 import requests
 
-
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(level=logging.INFO)
 
 def log_and_raise_error(response, message_info, message_error, threshold=300):
     """
@@ -10,7 +10,7 @@ def log_and_raise_error(response, message_info, message_error, threshold=300):
     """
     if response.status_code >= threshold:
         full_message = f"{message_error} {response.json()['error']}"
-        logging.error(full_message)
+        logger.error(full_message)
         raise Exception(full_message)
     else:
         logging.info(message_info)
