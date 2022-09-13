@@ -39,7 +39,7 @@ class FlightBot(ActivityHandler):
         """
         self.create_elements()
         return await turn_context.send_activity(
-            MessageFactory.text(msg.messages_dict['WELCOME']))
+            MessageFactory.text(msg.WELCOME))
 
 
     async def on_message_activity(self, turn_context: TurnContext):
@@ -49,7 +49,17 @@ class FlightBot(ActivityHandler):
         intent, entities = luis_response.intent, luis_response.entities
         fixed_entities = self._fix_end_date(entities)
         self._update_elements(fixed_entities)
+                
+        if self.elements.is_complete():
+            text = self.elements.summarize()
+        else:
 
-
-        text = f"{self.elements.__dict__.items()}"
+            if len(entities) > 0:
+                next_element_to_get = self.elements.next_unknown_element()
+                text = msg.element_to_get_dict[next_element_to_get]
+            elif intent == ei.GREETING_INTENT:
+                text = msg.GREETING_INTENT
+            else:
+                text = msg.NONE_INTENT
+            text = f"intent: {intent}, text: {text}"
         return await turn_context.send_activity(MessageFactory.text(text))
