@@ -43,7 +43,9 @@ class FlightBot(ActivityHandler):
 
 
     async def on_message_activity(self, turn_context: TurnContext):
-        """Display user intent and entities."""
+        """
+        Return a message according to the intent and entities.
+        """
         user_input = turn_context.activity.text
         luis_response = understand(user_input)
         intent, entities = luis_response.intent, luis_response.entities
