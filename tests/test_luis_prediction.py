@@ -1,10 +1,5 @@
-import sys
-import os
-path = "     |     ".join(sys.path)
-message = f"\n{path=}\n{os.getcwd()=}\n{os.getenv('PYTEST_CURRENT_TEST')=}" 
-
 import pytest
-from ..common.luis_tools.luis_prediction import LuisPrediction
+from common.luis_tools.luis_prediction import LuisPrediction
 
 class MockResponse:
     def __init__(self, json: dict):

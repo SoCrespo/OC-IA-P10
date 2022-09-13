@@ -1,10 +1,6 @@
-import sys
-print(sys.path[0])
 import pytest
-import sys
-import logging
 
-from ..common.bot.elements import Elements
+from common.bot.elements import Elements
 
 @pytest.fixture
 def empty_elements():
