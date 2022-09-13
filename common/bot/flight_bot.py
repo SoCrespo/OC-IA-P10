@@ -1,20 +1,39 @@
+from email.utils import localtime
+import logging
 from typing import List
 
 from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
-from botbuilder.schema import ChannelAccount
+from botbuilder.schema import ChannelAccount, Activity
+
 from common.bot.elements import Elements
 from common.bot.luis_functions import understand
-
+from common.bot import messages as msg
 import entities_and_intents as ei
-from . import messages as msg
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 class FlightBot(ActivityHandler):
-    """
-    A simple echo bot at this stage.
-    """
+
     def create_elements(self):
         self.elements = Elements()
+
+    def create_conversation(self):
+        self.conversation = []
+
+    def log_conversation(self, level=logging.INFO):
+        """
+        Log self.conversation.
+        """
+        for turn_context in self.conversation:
+            text = turn_context.activity.text
+            logger.log(level, text)
+            timestamp = turn_context.activity.timestamp
+            user = turn_context.activity.from_property.name
+            logger.log(level, f'{timestamp} {user}: {text}')
+
 
     def _fix_end_date(self, entities):
         """
@@ -40,14 +59,19 @@ class FlightBot(ActivityHandler):
         Welcome user.
         """
         self.create_elements()
+        self.create_conversation()
+        message = msg.FIRST_MESSAGE + msg.START
+        output_turn = TurnContext(self, Activity(text=message, from_property=members_added[0]))
+        self.conversation.append(output_turn)
         return await turn_context.send_activity(
-            MessageFactory.text(msg.WELCOME))
+            MessageFactory.text(message))
 
 
     async def on_message_activity(self, turn_context: TurnContext):
         """
         Return a message according to the intent and entities.
         """
+        self.conversation.append(turn_context)
         user_input = turn_context.activity.text
         luis_response = understand(user_input)
         intent, entities = luis_response.intent, luis_response.entities
@@ -58,7 +82,8 @@ class FlightBot(ActivityHandler):
             if intent == ei.AGREE_INTENT:
                 text = msg.AGREE_INTENT
             elif intent == ei.DISAGREE_INTENT:
-                text = msg.DISAGREE_INTENT  
+                text = msg.DISAGREE_INTENT
+                self.log_conversation(level=logging.WARNING)  
                 self.elements.reset_values()
             else:    
                 text = self.elements.summarize() + msg.ASK_CONFIRMATION
@@ -70,6 +95,10 @@ class FlightBot(ActivityHandler):
             elif intent == ei.GREETING_INTENT:
                 text = msg.GREETING_INTENT
             else:
-                text = msg.NONE_INTENT
-
+                text = msg.NONE_INTENT + ' ' + self.conversation[-2].activity.text
+        
+        output_turn = TurnContext(self, Activity(text=text))
+        self.conversation.append(output_turn)
         return await turn_context.send_activity(MessageFactory.text(text))
+
+       
