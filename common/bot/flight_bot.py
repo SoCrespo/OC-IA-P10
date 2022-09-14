@@ -5,13 +5,15 @@ from typing import List
 
 from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount, Activity
+from opencensus.ext.azure.log_exporter import AzureLogHandler
 
 from common.bot.elements import Elements
 from common.bot.luis_functions import understand
 from common.bot import messages as msg
 import entities_and_intents as ei
 
-
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler()) # No param needed if APPLICATIIONINSIGHTS_CONNECTION_STRING is set
 
 class FlightBot(ActivityHandler):
 
@@ -29,8 +31,7 @@ class FlightBot(ActivityHandler):
             text = activity.text
             timestamp = activity.timestamp
             user = activity.from_property.name
-
-            logging.log(level=level, msg=f'{timestamp} {user}: {text}')
+            logger.log(level=level, msg=f'{timestamp} {user}: {text}')
 
 
     def _fix_end_date(self, entities):
