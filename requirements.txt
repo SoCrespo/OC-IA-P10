@@ -11,4 +11,4 @@ botframework-connector==4.14.2
 botframework-streaming==4.14.2
 pytest==7.1.2
 python-dotenv==0.20.0
-
+opencensus-ext-azure==0.11.0
