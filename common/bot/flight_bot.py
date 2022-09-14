@@ -1,4 +1,5 @@
-from email.utils import localtime
+
+from datetime import datetime
 import logging
 from typing import List
 
@@ -11,9 +12,6 @@ from common.bot import messages as msg
 import entities_and_intents as ei
 
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
 
 class FlightBot(ActivityHandler):
 
@@ -23,18 +21,16 @@ class FlightBot(ActivityHandler):
     def create_conversation(self):
         self.conversation = []
 
-    def log_conversation(self, level=logging.INFO):
+    def log_conversation(self, level=logging.WARNING):
         """
         Log self.conversation.
         """
-        for turn_context in self.conversation:
-            text = turn_context.activity.text
-            timestamp = turn_context.activity.timestamp
-            try:
-                user = turn_context.activity.from_property.name
-            except:
-                user = 'Unknown'
-            logger.log(level, f'{timestamp} {user}: {text}')
+        for activity in self.conversation:
+            text = activity.text
+            timestamp = activity.timestamp
+            user = activity.from_property.name
+
+            logging.log(level=level, msg=f'{timestamp} {user}: {text}')
 
 
     def _fix_end_date(self, entities):
@@ -63,19 +59,26 @@ class FlightBot(ActivityHandler):
         self.create_elements()
         self.create_conversation()
         message = msg.FIRST_MESSAGE + msg.START
-        output_turn = TurnContext(self, Activity(text=message, from_property=members_added[0]))
-        self.conversation.append(output_turn)
-        return await turn_context.send_activity(
-            MessageFactory.text(message))
+        welcome_activity = Activity(text=message, from_property=ChannelAccount(name="Bot"), timestamp=datetime.now())
+        self.conversation.append(welcome_activity)
+        return await turn_context.send_activity(MessageFactory.text(message))
 
 
     async def on_message_activity(self, turn_context: TurnContext):
         """
-        Return a message according to the intent and entities.
+        Return a message according to the intent and entities detected in message by Luis.
         """
-        self.conversation.append(turn_context)
-        user_input = turn_context.activity.text
-        luis_response = understand(user_input)
+
+        text = turn_context.activity.text
+
+        user_activity = Activity(
+            text=text, 
+            from_property=ChannelAccount(name="User"), 
+            timestamp=datetime.now()
+            )
+        self.conversation.append(user_activity)
+
+        luis_response = understand(text)
         intent, entities = luis_response.intent, luis_response.entities
         fixed_entities = self._fix_end_date(entities)
         self._update_elements(fixed_entities)
@@ -89,7 +92,6 @@ class FlightBot(ActivityHandler):
                 self.elements.reset_values()
             else:    
                 text = self.elements.summarize() + msg.ASK_CONFIRMATION
-
         else:
             if len(entities) > 0:
                 next_element_to_get = self.elements.next_unknown_element()
@@ -104,8 +106,12 @@ class FlightBot(ActivityHandler):
                 text = text + " " + previous_text
 
         
-        output_turn = TurnContext(self, Activity(text=text))
-        self.conversation.append(output_turn)
+        bot_activity = Activity(
+            text=text, 
+            from_property=ChannelAccount(name="Bot"), 
+            timestamp=datetime.now())
+        self.conversation.append(bot_activity)
+
         return await turn_context.send_activity(MessageFactory.text(text))
 
        
