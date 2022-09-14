@@ -27,11 +27,15 @@ class FlightBot(ActivityHandler):
         """
         Log self.conversation.
         """
+        conversation_elements = []
         for activity in self.conversation:
             text = activity.text
-            timestamp = activity.timestamp
+            timestamp = activity.timestamp.strftime("%d/%m/%Y, %H:%M:%S")
             user = activity.from_property.name
-            logger.log(level=level, msg=f'{timestamp} {user}: {text}')
+            line = f"{timestamp}  | {user}: {text}"
+            conversation_elements.append(line)
+        msg = "The following conversation lead to 'DISAGREE' intent:\n\n" + "\n".join(conversation_elements)
+        logger.log(level=level, msg=msg)
 
 
     def _fix_end_date(self, entities):
