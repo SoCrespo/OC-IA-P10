@@ -11,7 +11,7 @@ from common.bot import messages as msg
 import entities_and_intents as ei
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 
@@ -29,9 +29,11 @@ class FlightBot(ActivityHandler):
         """
         for turn_context in self.conversation:
             text = turn_context.activity.text
-            logger.log(level, text)
             timestamp = turn_context.activity.timestamp
-            user = turn_context.activity.from_property.name
+            try:
+                user = turn_context.activity.from_property.name
+            except:
+                user = 'Unknown'
             logger.log(level, f'{timestamp} {user}: {text}')
 
 
@@ -95,7 +97,12 @@ class FlightBot(ActivityHandler):
             elif intent == ei.GREETING_INTENT:
                 text = msg.GREETING_INTENT
             else:
-                text = msg.NONE_INTENT + ' ' + self.conversation[-2].activity.text
+                text = msg.NONE_INTENT
+                previous_text = msg.START
+                if len(self.conversation)>2:
+                    previous_text = self.conversation[-2].activity.text
+                text = text + " " + previous_text
+
         
         output_turn = TurnContext(self, Activity(text=text))
         self.conversation.append(output_turn)
