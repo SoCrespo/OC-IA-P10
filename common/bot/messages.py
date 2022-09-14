@@ -1,7 +1,7 @@
 
 FIRST_MESSAGE = "Hi! I'm your flight reservation assistant."
 START = " How can I help you?"
-NONE_INTENT = "I'm sorry, I didn't understand. "
+NONE_INTENT = "Sorry, I didn't understand. "
 GREETING_INTENT = "I'm at your service!"
 AGREE_INTENT = "Great, let's find your flights!"
 DISAGREE_INTENT = "Sorry, I'm trying to do my best. Thanks for your patience! How can I help you?"
