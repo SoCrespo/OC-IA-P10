@@ -23,6 +23,7 @@ class FlightBot(ActivityHandler):
     def create_conversation(self):
         self.conversation = []
 
+
     def log_conversation(self, level=logging.WARNING):
         """
         Log self.conversation.
@@ -63,6 +64,7 @@ class FlightBot(ActivityHandler):
         """
         self.create_elements()
         self.create_conversation()
+
         message = msg.FIRST_MESSAGE + msg.START
         welcome_activity = Activity(text=message, from_property=ChannelAccount(name="Bot"), timestamp=datetime.now())
         self.conversation.append(welcome_activity)
@@ -88,6 +90,8 @@ class FlightBot(ActivityHandler):
         fixed_entities = self._fix_end_date(entities)
         self._update_elements(fixed_entities)
                 
+        text = msg.NONE_INTENT
+
         if self.elements.is_complete():
             if intent == ei.AGREE_INTENT:
                 text = msg.AGREE_INTENT
@@ -103,12 +107,6 @@ class FlightBot(ActivityHandler):
                 text = msg.element_to_get_dict[next_element_to_get]
             elif intent == ei.GREETING_INTENT:
                 text = msg.GREETING_INTENT
-            else:
-                text = msg.NONE_INTENT
-                previous_text = msg.START
-                if len(self.conversation)>2:
-                    previous_text = self.conversation[-2].activity.text
-                text = text + " " + previous_text
 
         
         bot_activity = Activity(
