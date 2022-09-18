@@ -37,15 +37,22 @@ class LuisManager:
         - get test status
         - publish model.
         - get prediction.
+
+        NOTE: this class should be split into different classes to separate authoring
+        (create intents and entities, train, test and publish the model) and predictions.
+        But batch testing, which is part of the training, needs prediction endpoint and key.
+        So this class is a compromise at this stage of the project and may vary according
+        to the LUIS API evolution.
+    
         """
         self.subscription_id=luis_subscription_id
         self.app_id = luis_app_id
         self.version_id = luis_version_id
+        self.slot_name = luis_slot_name
         self.authoring_key = luis_authoring_key
         self.authoring_endpoint = luis_authoring_endpoint
         self.prediction_key = luis_prediction_key
         self.prediction_endpoint = luis_prediction_endpoint
-        self.slot_name = luis_slot_name
 
         self.request_authoring_url = f"{self.authoring_endpoint}luis/authoring/v3.0/apps/{self.app_id}/versions/{self.version_id}/"
         self.request_publish_url = f'{self.authoring_endpoint}luis/authoring/v3.0-preview/apps/{self.app_id}/publish'
