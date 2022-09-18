@@ -7,10 +7,10 @@ from botbuilder.core import ActivityHandler, MessageFactory, TurnContext
 from botbuilder.schema import ChannelAccount, Activity
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 
+from common.bot import messages as msg
+from common.bot import entities_and_intents as ei
 from common.bot.elements import Elements
 from common.bot.luis_functions import understand
-from common.bot import messages as msg
-import entities_and_intents as ei
 
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler()) # No param needed if APPLICATIIONINSIGHTS_CONNECTION_STRING is set
